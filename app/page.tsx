@@ -1,10 +1,7 @@
-import NarBar from './components/NarBar'
+import MenuMain from './pages/menu'
 const HomePage = () => {
   return (
-    <>
-      <NarBar />
-
-    </>
+    <MenuMain/>
   );
 };
 
