@@ -1,5 +1,10 @@
+import { Input } from '@mui/material';
+import "./index.scss";
 const Search = () => {
-  return <>
-  </>
-}
-export default Search
+	return (
+		<div className="search-wrap">
+      <Input autoFocus={false} />
+		</div>
+	);
+};
+export default Search;

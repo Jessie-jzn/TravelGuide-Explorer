@@ -1,5 +1,30 @@
 .narbar-wrap{
   padding:32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  width: 100%;
+}
+.address-wrap{
+  display: flex;
+  align-items: center;
+  .icon-location{
+    background-image: url('../../static/image/location.svg');
+    width: 16px;
+    height: 16px;
+flex-shrink: 0;
+  }
+  .address-text{
+    color: #4B5563;
+    text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Avenir;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px; /* 233.333% */
+  }
 }
 .icon {
   /* 可以设置宽高、背景大小等 */
@@ -7,12 +32,7 @@
   height: 100%;
 }
 .icon-sort{
-  background-image: url('../../image/svg/sort.svg');
-  width: 16px;
-  height: 12px;
-}
-.icon-location{
-  background-image: url('../../image/svg/sort.svg');
+  background-image: url('../../static/image/sort.svg');
   width: 16px;
   height: 12px;
 }
