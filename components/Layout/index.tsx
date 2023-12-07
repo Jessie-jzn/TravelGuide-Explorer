@@ -19,7 +19,7 @@ const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
         <Header />
         <main>{children}</main>
         <footer className="text-lg font-light">
-          © {new Date().getFullYear()}, Built with{' '}
+          © {new Date().getFullYear()}, Built with Jessie
           <a href="https://nextjs.org/">Next.js</a>
           &#128293;
         </footer>
@@ -53,6 +53,18 @@ const Header = (): JSX.Element => {
         'mb-2': !isRoot,
       })}
     >
+      <div className='header-wrap'>
+        <Link href="/">
+        <div className="w-[57px] h-[43px] text-right text-black text-xl font-medium font-['Heebo']">Works</div>
+          {/* <div className='header-wrap-text'>Work</div> */}
+        </Link>
+        <Link href="/">
+          Blog
+        </Link>
+        <Link href="/">
+          Contact
+        </Link>
+      </div>
       <div className={'max-w-md'}>
         {isRoot ? <LargeTitle /> : <SmallTitle />}
       </div>
@@ -79,7 +91,7 @@ const LargeTitle = (): JSX.Element => (
           'dark:text-white'
         )}
       >
-        Next.Js Starter Blog
+       
       </div>
     </Link>
   </h1>

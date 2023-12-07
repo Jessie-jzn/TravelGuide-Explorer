@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @layer base {
+  @import './base.css';
+
+  a {
+    @apply dark:text-yellow-500;
+  }
+}
+
+@layer components {
+  @import './components.css';
+} */
+
+a:hover {
+  @apply underline;
+}
+
+span,
+p {
+  @apply font-light;
+}
+
+.blur {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  transition:
+    filter 500ms ease-in,
+    -webkit-filter 500ms ease-in;
+}
+
+.blur.lazyloaded {
+  -webkit-filter: blur(0);
+  filter: blur(0);
+}

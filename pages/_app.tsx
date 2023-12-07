@@ -1,7 +1,7 @@
 import { ThemeProvider } from "next-themes";
-// import "@assets/css/main.css";
-// import "typeface-open-sans";
-// import "typeface-merriweather";
+import "../styles/main.css";
+import "typeface-open-sans";
+import "typeface-merriweather";
 
 interface MyAppProps {
   Component: React.ComponentType;
