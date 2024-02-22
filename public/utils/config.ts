@@ -13,3 +13,22 @@ export const SiteMetaData = {
     GitHub: 'Jose_R_Felix', // Twitter 账号
   },
 };
+
+export const NavBarData = [
+  {
+    title: 'About me',
+    href:'/about',
+  },
+  {
+    title: 'Work',
+    href:'/work',
+  },
+  {
+    title: 'Travel',
+    href:'/travel',
+  },
+  {
+    title: 'Contact',
+    href:'/contact',
+  },
+];
