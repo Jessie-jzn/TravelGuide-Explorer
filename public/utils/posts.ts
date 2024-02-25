@@ -132,3 +132,73 @@ export function getPostBySlug(slug: string): PostBySlugResult | undefined {
 
   return { frontmatter, post: { content, excerpt }, previousPost, nextPost };
 }
+
+import path from 'path';
+import remark from 'remark';
+import html from 'remark-html';
+
+const postsDirectory = path.join(process.cwd(), 'posts');
+
+export function getSortedPostsData() {
+  // 获取 /posts 目录下的文件名
+  const fileNames = fs.readdirSync(postsDirectory);
+  const allPostsData = fileNames.map(fileName => {
+    // 去掉文件名的扩展名获取 id
+    const id = fileName.replace(/\.md$/, '');
+
+    // 读取 markdown 文件内容
+    const fullPath = path.join(postsDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+    // 使用 gray-matter 解析 metadata
+    const matterResult = matter(fileContents);
+
+    // 合并 id 和 metadata
+    return {
+      id,
+      ...matterResult.data
+    };
+  });
+  // 根据日期排序
+  return allPostsData.sort((a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}
+export function getAllPostIds() {
+  const fileNames = fs.readdirSync(postsDirectory);
+
+  // 返回一个包含 { params: { id } } 的数组
+  return fileNames.map(fileName => {
+    return {
+      params: {
+        id: fileName.replace(/\.md$/, '')
+      }
+    };
+  });
+}
+
+
+export async function getPostData(id) {
+  const fullPath = path.join(postsDirectory, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+  // 使用 gray-matter 解析 metadata
+  const matterResult = matter(fileContents);
+
+  // 使用 remark 将 markdown 转换为 HTML 字符串
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content);
+  const contentHtml = processedContent.toString();
+
+  // 合并 id、metadata 和 contentHtml
+  return {
+    id,
+    contentHtml,
+    ...matterResult.data
+  };
+}

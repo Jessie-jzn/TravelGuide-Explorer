@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
+// import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import style from "react-syntax-highlighter/dist/cjs/styles/prism/dracula";
 import Image from "next/image";
@@ -22,12 +22,12 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
           </h1>
           <p className="text-sm">{frontmatter.date}</p>
         </header>
-        <ReactMarkdown
+        {/* <ReactMarkdown
           className="mb-4 prose lg:prose-lg dark:prose-dark"
           escapeHtml={false}
           source={post.content}
           renderers={{ code: CodeBlock, image: MarkdownImage }}
-        />
+        /> */}
         <hr className="mt-4" />
         <footer>
           {/* <Bio className="mt-8 mb-16" /> */}
