@@ -1,6 +1,21 @@
 import Image from "next/image";
 
-export default function Avatar({ author }) {
+interface Author {
+  node: {
+    firstName?: string;
+    lastName?: string;
+    name?: string;
+    avatar: {
+      url: string;
+    };
+  };
+}
+
+interface AvatarProps {
+  author: Author;
+}
+
+export default function Avatar({ author }: AvatarProps) {
   const isAuthorHaveFullName =
     author?.node?.firstName && author?.node?.lastName;
   const name = isAuthorHaveFullName
@@ -14,7 +29,7 @@ export default function Avatar({ author }) {
           src={author.node.avatar.url}
           layout="fill"
           className="rounded-full"
-          alt={name}
+          alt={author.node.avatar.url}
         />
       </div>
       <div className="text-xl font-bold">{name}</div>

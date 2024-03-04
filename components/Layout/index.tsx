@@ -8,6 +8,9 @@ import { getAllMenu } from '../../lib/api';
 interface LayoutProps {
   children: React.ReactNode;
 }
+interface MenuProps {
+  menuList: MenuItem[];
+}
 
 const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
   const [menuList, setMenuList] = useState<MenuItem[]>([]);
@@ -26,24 +29,7 @@ const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
         <div className="flex flex-col w-full max-w-7xl px-10 bg-white">
           {!!menuList.length && <Header menuList={menuList} />}
           <main>{children}</main>
-          <footer className="mt-32 flex-none">
-            <div className="border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40">
-              <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-                <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                  {menuList?.map((item) => (
-                    <Link href={item.uri} key={item.id}>
-                      <div className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400">
-                        {item.title}
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-                <div className="text-sm text-zinc-400 dark:text-zinc-500">
-                  © {new Date().getFullYear()}, Built with Jessie &#128293;
-                </div>
-              </div>
-            </div>
-          </footer>
+          <Footer menuList={menuList}></Footer>
         </div>
       </div>
     </div>
@@ -52,11 +38,7 @@ const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
 
 export default Layout;
 
-interface HeaderProps {
-  menuList: MenuItem[];
-}
-
-const Header: FC<HeaderProps> = ({ menuList }: HeaderProps) => {
+const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
   const { resolvedTheme, setTheme } = useTheme();
 
   const toggleDarkMode = (checked: boolean): void => {
@@ -92,5 +74,28 @@ const Header: FC<HeaderProps> = ({ menuList }: HeaderProps) => {
         />
       </div>
     </div>
+  );
+};
+
+const Footer: FC<MenuProps> = ({ menuList }: MenuProps) => {
+  return (
+    <footer className="mt-32 flex-none">
+      <div className="border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40">
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
+            {menuList?.map((item: MenuItem) => (
+              <Link href={item.uri} key={item.id}>
+                <div className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400">
+                  {item.title}
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="text-sm text-zinc-400 dark:text-zinc-500">
+            © {new Date().getFullYear()}, Built with Jessie &#128293;
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };

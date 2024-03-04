@@ -15,34 +15,52 @@ if (!URL.canParse(process.env.WORDPRESS_API_URL)) {
 }
 
 const { protocol, hostname, port, pathname } = new URL(
-  process.env.WORDPRESS_API_URL,
+  process.env.WORDPRESS_API_URL
 );
+
+console.log('protocol', hostname, port, pathname);
 
 /** @type {import('next').NextConfig} */
 module.exports = {
-  images: {
-    domains: ["secure.gravatar.com"],
-    formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '*.nextjswp.**'
-      }
-    ]
-  },
-  logging: {
-    fetches: {
-      fullUrl: true
-    }
-  }
   // images: {
+  //   domains: ["secure.gravatar.com"],
+  //   formats: ['image/avif', 'image/webp'],
   //   remotePatterns: [
   //     {
-  //       protocol: protocol.slice(0, -1),
-  //       hostname,
-  //       port,
-  //       pathname: `${pathname}/**`,
+  //       protocol: 'https',
+  //       hostname: '*.nextjswp.**'
   //     },
-  //   ],
+  //     {
+  //       protocol: 'https',
+  //       hostname: '*.wp.**'
+  //     },
+  //     {
+  //       protocol: 'https',
+  //       hostname: hostname
+  //     }
+  //   ]
   // },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: protocol.slice(0, -1),
+        hostname,
+        port,
+        pathname: `${pathname}/**`,
+      },
+      {
+        protocol: 'https',
+        hostname: '*.wp.**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.nextjswp.**',
+      },
+    ],
+  },
 };
