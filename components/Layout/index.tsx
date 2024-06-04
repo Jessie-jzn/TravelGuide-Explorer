@@ -1,33 +1,18 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { useTheme } from 'next-themes';
 import { MenuItem } from '../../lib/type';
 import { NavBarData } from '../../public/utils/config';
-// import { useTranslation } from 'next-i18next';
-import { GetStaticProps } from 'next';
-// import { getAllMenu } from '../../lib/api';
-import getMenuList from '@/lib/notion/getMenuList';
 interface LayoutProps {
   children: React.ReactNode;
-  menuList: MenuItem[];
 }
 interface MenuProps {
   menuList: MenuItem[];
 }
 
-const Layout: FC<LayoutProps> = ({ menuList, children }: LayoutProps) => {
-  // const [menuList, setMenuList] = useState<MenuItem[]>([]);
-  // const { t } = useTranslation('common');
-
-  // useEffect(() => {
-  //   const fetchMenu = async () => {
-  //     // const menuData = await getAllMenu();
-  //     const menuData = NavBarData;
-  //     setMenuList(menuData);
-  //   };
-  //   fetchMenu();
-  // }, []);
+const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
+  const menuList = NavBarData;
 
   return (
     <div className="w-full">
@@ -68,7 +53,7 @@ const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
           {menuList.map((item) => (
             <Link href={item.uri} key={item.id}>
               <div className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400">
-                {item.name}
+                {item.title}
               </div>
             </Link>
           ))}
@@ -93,7 +78,7 @@ const Footer: FC<MenuProps> = ({ menuList }: MenuProps) => {
             {menuList?.map((item: MenuItem) => (
               <Link href={item.uri} key={item.id}>
                 <div className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400">
-                  {item.name}
+                  {item.title}
                 </div>
               </Link>
             ))}
