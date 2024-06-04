@@ -13,30 +13,35 @@ export const SiteMetaData = {
     GitHub: 'Jessie', // Twitter 账号
   },
 };
-
 export const NavBarData = [
   {
-    title: '👩关于我',
-    href:'/about',
+    id: 1,
+    title: '🏠首页',
+    uri: '/about',
   },
   {
-    title: '🇨🇳中国',
-    href:'/travel',
+    id: 2,
+    title: '🌊攻略',
+    uri: '/guide',
   },
+  // {
+  //   id: 3,
+  //   title: '🇯🇵日本',
+  //   uri: '/travel',
+  // },
+  // {
+  //   id: 4,
+  //   title: '🇲🇾马来西亚',
+  //   uri: '/travel',
+  // },
+  // {
+  //   id: 5,
+  //   title: '🇵🇭菲律宾',
+  //   uri: '/travel',
+  // },
   {
-    title: '🇯🇵日本',
-    href:'/travel',
-  },
-  {
-    title: '🇲🇾马来西亚',
-    href:'/travel',
-  },
-  {
-    title: '🇵🇭菲律宾',
-    href:'/travel',
-  },
-  {
+    id: 6,
     title: '☎️联系',
-    href:'/contact',
+    uri: '/contact',
   },
 ];

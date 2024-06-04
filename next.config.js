@@ -1,45 +1,21 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   publicRuntimeConfig: {
-//     // 在客户端访问配置
-//   },
-// }
-
-// module.exports = nextConfig
-
-if (!URL.canParse(process.env.WORDPRESS_API_URL)) {
-  throw new Error(`
-    Please provide a valid WordPress instance URL.
-    Add to your environment variables WORDPRESS_API_URL.
-  `);
-}
-
-const { protocol, hostname, port, pathname } = new URL(
-  process.env.WORDPRESS_API_URL
-);
-
-console.log('protocol', hostname, port, pathname);
-
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 module.exports = {
-  // images: {
-  //   domains: ["secure.gravatar.com"],
-  //   formats: ['image/avif', 'image/webp'],
-  //   remotePatterns: [
-  //     {
-  //       protocol: 'https',
-  //       hostname: '*.nextjswp.**'
-  //     },
-  //     {
-  //       protocol: 'https',
-  //       hostname: '*.wp.**'
-  //     },
-  //     {
-  //       protocol: 'https',
-  //       hostname: hostname
-  //     }
-  //   ]
-  // },
+  webpack: (config, { isServer }) => {
+    // 添加别名配置
+    config.resolve.alias['@'] = path.resolve(__dirname);
+    // config.resolve.alias['@/notion'] = path.resolve(__dirname, 'lib', 'notion');
+    // config.resolve.alias['dns'] = path.resolve(__dirname, 'empty.js');
+    // config.resolve.alias['fs'] = path.resolve(__dirname, 'empty.js');
+
+    // 如果需要在服务器端进行别名配置，则还需要进行服务端的别名配置
+    if (isServer) {
+      config.resolve.alias['@'] = path.resolve(__dirname);
+    }
+
+    return config;
+  },
   logging: {
     fetches: {
       fullUrl: true,
@@ -48,18 +24,20 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        protocol: protocol.slice(0, -1),
-        hostname,
-        port,
-        pathname: `${pathname}/**`,
-      },
-      {
         protocol: 'https',
         hostname: '*.wp.**',
       },
       {
         protocol: 'https',
         hostname: '*.nextjswp.**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.githubusercontent.**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.aglty.**',
       },
     ],
   },

@@ -29,6 +29,9 @@
       ],
       "@/*": [
         "./*"
+      ],
+      "@/notion": [
+        "./lib/notion/*"
       ]
     },
     "types": [
@@ -42,7 +45,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "empty.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,7 +1,6 @@
 export interface MenuItem {
-    id: number;
-    slug: string;
-    title: string;
-    uri: string;
-  }
-  
+  id: string;
+  slug?: string;
+  name: string;
+  uri: string;
+}

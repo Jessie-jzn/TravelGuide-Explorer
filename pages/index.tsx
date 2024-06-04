@@ -1,10 +1,11 @@
 import Layout from '../components/Layout/index';
 import Meta from '../components/Meta';
-import { getAllMenu } from '../lib/api';
+// import { getAllMenu } from '../lib/api';
+// import withMenuList from '../hoc/withMenuList';
 
-export default function Home(): JSX.Element {
+const Home = () => {
   return (
-    <Layout>
+    <>
       <Meta title="Jessie's Blog" />
       <div className="flex-auto mt-10">
         <div className="mx-auto w-full max-w-7xl">
@@ -71,6 +72,7 @@ export default function Home(): JSX.Element {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
-}
+};
+export default Home;

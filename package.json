@@ -11,14 +11,17 @@
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
+    "@notionhq/client": "^2.2.15",
     "classnames": "^2.3.1",
     "date-fns": "^2.28.0",
     "install": "^0.13.0",
     "next": "14.0.3",
     "next-themes": "^0.2.1",
+    "notion-client": "^6.16.0",
     "npm": "^10.2.4",
     "react": "^18.2.0",
     "react-dom": "^18",
+    "react-notion-x": "^6.16.0",
     "react-syntax-highlighter": "^15.5.0",
     "react-toggle-dark-mode": "^1.1.1",
     "sass": "^1.69.5"

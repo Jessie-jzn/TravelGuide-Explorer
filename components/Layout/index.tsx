@@ -3,25 +3,31 @@ import Link from 'next/link';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { useTheme } from 'next-themes';
 import { MenuItem } from '../../lib/type';
-import { getAllMenu } from '../../lib/api';
-
+import { NavBarData } from '../../public/utils/config';
+// import { useTranslation } from 'next-i18next';
+import { GetStaticProps } from 'next';
+// import { getAllMenu } from '../../lib/api';
+import getMenuList from '@/lib/notion/getMenuList';
 interface LayoutProps {
   children: React.ReactNode;
+  menuList: MenuItem[];
 }
 interface MenuProps {
   menuList: MenuItem[];
 }
 
-const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
-  const [menuList, setMenuList] = useState<MenuItem[]>([]);
+const Layout: FC<LayoutProps> = ({ menuList, children }: LayoutProps) => {
+  // const [menuList, setMenuList] = useState<MenuItem[]>([]);
+  // const { t } = useTranslation('common');
 
-  useEffect(() => {
-    const fetchMenu = async () => {
-      const menuData = await getAllMenu();
-      setMenuList(menuData);
-    };
-    fetchMenu();
-  }, []);
+  // useEffect(() => {
+  //   const fetchMenu = async () => {
+  //     // const menuData = await getAllMenu();
+  //     const menuData = NavBarData;
+  //     setMenuList(menuData);
+  //   };
+  //   fetchMenu();
+  // }, []);
 
   return (
     <div className="w-full">
@@ -40,6 +46,7 @@ export default Layout;
 
 const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
   const { resolvedTheme, setTheme } = useTheme();
+  // const { t } = useTranslation('common');
 
   const toggleDarkMode = (checked: boolean): void => {
     const theme = checked ? 'dark' : 'light';
@@ -61,7 +68,7 @@ const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
           {menuList.map((item) => (
             <Link href={item.uri} key={item.id}>
               <div className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400">
-                {item.title}
+                {item.name}
               </div>
             </Link>
           ))}
@@ -86,7 +93,7 @@ const Footer: FC<MenuProps> = ({ menuList }: MenuProps) => {
             {menuList?.map((item: MenuItem) => (
               <Link href={item.uri} key={item.id}>
                 <div className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400">
-                  {item.title}
+                  {item.name}
                 </div>
               </Link>
             ))}
