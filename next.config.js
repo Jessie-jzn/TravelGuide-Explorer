@@ -2,6 +2,9 @@
 const path = require('path');
 
 module.exports = {
+  env: {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  },
   webpack: (config, { isServer }) => {
     // 添加别名配置
     config.resolve.alias['@'] = path.resolve(__dirname);

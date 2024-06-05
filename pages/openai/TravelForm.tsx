@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { generateText } from '@/lib/openai/OpenaiService';
 
 interface FormValues {
   departureDate: string;
@@ -22,6 +23,7 @@ const TravelForm = () => {
     activities: '',
     preferredStopoverLocations: '',
   });
+  const [response, setResponse] = useState('');
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -37,21 +39,17 @@ const TravelForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form Values:', formValues);
-    debugger;
-    const response = await window.fetch('/api/openai', {
+
+    const res = await fetch('/api/openai', {
       method: 'POST',
-      headers: new Headers({ 'Content-type': 'application/json' }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(formValues),
     });
-    const result = await response.json();
-    if (!response.ok) {
-      alert(result.error);
-      return;
-    }
-    // setGptResponse(result.content);
 
-    // Perform form submission actions, such as sending data to an API
+    const data = await res.json();
+    setResponse(data.result.choices[0].message.content);
   };
 
   return (
