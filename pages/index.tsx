@@ -1,4 +1,3 @@
-import Layout from '../components/Layout/index';
 import Meta from '../components/Meta';
 // import { getAllMenu } from '../lib/api';
 // import withMenuList from '../hoc/withMenuList';

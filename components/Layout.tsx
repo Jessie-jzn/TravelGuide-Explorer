@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
-import ThemeSwitch from '../ThemeSwitch';
-import { MenuItem } from '../../lib/type';
-import { NavBarData } from '../../public/utils/config';
+import ThemeSwitch from './ThemeSwitch';
+import { MenuItem } from '../lib/type';
+import { NavBarData } from '../public/utils/config';
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -34,7 +33,7 @@ const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
   return (
     <div className="flex justify-center items-center mt-16 mx-auto w-full max-w-7xl">
       <div className="h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10">
-        <a href="/">
+        <Link href="/">
           <Image
             alt="avatars"
             src="https://avatars.githubusercontent.com/u/18711470?v=4"
@@ -42,7 +41,7 @@ const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
             width={100}
             height={100}
           />
-        </a>
+        </Link>
       </div>
       <div className="pointer-events-auto md:block ml-10 mr-10">
         <div className="flex rounded-full bg-white px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
@@ -64,7 +63,7 @@ const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
 
 const Footer: FC<MenuProps> = ({ menuList }: MenuProps) => {
   return (
-    <footer className="mt-32 flex-none">
+    <div className="mt-32 flex-none">
       <div className="border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40">
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
@@ -81,6 +80,6 @@ const Footer: FC<MenuProps> = ({ menuList }: MenuProps) => {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 };

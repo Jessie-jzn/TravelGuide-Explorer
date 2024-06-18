@@ -13,4 +13,5 @@ export interface Post {
   url: string;
   date?: string;
   image: string;
+  tags?: any;
 }

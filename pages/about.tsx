@@ -1,5 +1,3 @@
-import Layout from '../components/Layout/index';
-
 const About = () => {
   return (
     <div className="flex-auto mt-10 ">

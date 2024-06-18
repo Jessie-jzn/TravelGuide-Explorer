@@ -80,6 +80,7 @@ export const formatDatabase = (pages: any) => {
     const imageProperty = page.properties['Image'];
     const dateProperty = page.properties['Date'];
     const uriProperty = page.properties['Uri'];
+    const tagsProperty = page.properties['Tags'];
 
     const name =
       nameProperty?.type === 'title'
@@ -97,6 +98,10 @@ export const formatDatabase = (pages: any) => {
       uriProperty?.type === 'rich_text'
         ? uriProperty.rich_text[0]?.plain_text || ''
         : '';
+    const tags =
+      tagsProperty?.type === 'multi_select'
+        ? tagsProperty.multi_select.map((tag: any) => tag.name)
+        : [];
 
     return {
       id: page.id,
@@ -105,6 +110,7 @@ export const formatDatabase = (pages: any) => {
       url: page.url,
       date,
       uri,
+      tags,
       image:
         'https://cdn.aglty.io/blog-starter-2021-template/posts/virtual-tour_20210331171226_0.jpg?format=auto&w=480',
     };

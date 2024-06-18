@@ -1,6 +1,9 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* @layer base {
   @import './base.css';
@@ -14,8 +17,12 @@
   @import './components.css';
 } */
 
+a {
+  @apply no-underline;
+}
+
 a:hover {
-  @apply underline;
+  @apply no-underline;
 }
 
 span,
