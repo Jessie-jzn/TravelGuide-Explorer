@@ -24,11 +24,11 @@ export const NavBarData = [
     title: '🌊攻略',
     uri: '/guide',
   },
-  {
-    id: 3,
-    title: '💻旅行助理',
-    uri: '/openai',
-  },
+  // {
+  //   id: 3,
+  //   title: '💻旅行助理',
+  //   uri: '/openai',
+  // },
   // {
   //   id: 3,
   //   title: '🇯🇵日本',

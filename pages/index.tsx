@@ -12,7 +12,7 @@ const Home = () => {
           <div className="relative px-4">
             <div>
               <div className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-                我是Jeesie
+                我是Jessie
               </div>
               <p className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
                 大家好，我是Jessie，一个热爱旅行的旅行博主。我很高兴有机会与你分享我的旅行经历和见闻。

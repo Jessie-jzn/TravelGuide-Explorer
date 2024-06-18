@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { DarkModeSwitch } from 'react-toggle-dark-mode';
-import { useTheme } from 'next-themes';
+import Image from 'next/image';
+
+import ThemeSwitch from '../ThemeSwitch';
 import { MenuItem } from '../../lib/type';
 import { NavBarData } from '../../public/utils/config';
 interface LayoutProps {
@@ -16,8 +17,8 @@ const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
 
   return (
     <div className="w-full">
-      <div className="inset-0 items-center flex flex-col sm:px-8 bg-zinc-50">
-        <div className="flex flex-col w-full max-w-7xl px-10 bg-white">
+      <div className="inset-0 items-center flex flex-col sm:px-8 bg-zinc-50 dark:bg-zinc-800">
+        <div className="flex flex-col w-full max-w-7xl px-10 bg-white dark:bg-zinc-800">
           {!!menuList.length && <Header menuList={menuList} />}
           <main>{children}</main>
           <Footer menuList={menuList}></Footer>
@@ -30,21 +31,16 @@ const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
 export default Layout;
 
 const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
-  const { resolvedTheme, setTheme } = useTheme();
-  // const { t } = useTranslation('common');
-
-  const toggleDarkMode = (checked: boolean): void => {
-    const theme = checked ? 'dark' : 'light';
-    setTheme(theme);
-  };
-
   return (
     <div className="flex justify-center items-center mt-16 mx-auto w-full max-w-7xl">
       <div className="h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10">
         <a href="/">
-          <img
+          <Image
+            alt="avatars"
             src="https://avatars.githubusercontent.com/u/18711470?v=4"
             className="rounded-full bg-zinc-100 object-cover dark:bg-zinc-800 h-9 w-9"
+            width={100}
+            height={100}
           />
         </a>
       </div>
@@ -60,10 +56,7 @@ const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
         </div>
       </div>
       <div className="flex space-x-4">
-        <DarkModeSwitch
-          checked={resolvedTheme === 'dark'}
-          onChange={toggleDarkMode}
-        />
+        <ThemeSwitch />
       </div>
     </div>
   );

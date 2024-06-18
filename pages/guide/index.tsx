@@ -12,9 +12,8 @@ interface Post {
   date?: string;
   image: string;
 }
-interface Props {
+interface IndexProps {
   posts: Post[];
-  // preview: boolean;
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -33,30 +32,35 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Index = ({ posts }: Props): JSX.Element => {
+const Index = ({ posts }: IndexProps): JSX.Element => {
   return (
     <div className="grid sm:gap-8 sm:grid-cols-2 lg:grid-cols-3 pt-8">
       {posts.map((item: Post) => (
         <Link href={`/guide/${item.id}`}>
-          <div className="flex-col group mb-8 md:mb-0" key={item.id}>
-            <div className="relative w-full overflow-clip">
-              <Image
-                width={480}
-                height={480}
-                alt={`Cover Image for`}
-                src={item.image}
-              />
-            </div>
-            <div className="bg-gray-100 p-8 border-1 border-t-0 rounded-b-lg">
+          <div
+            className="flex h-full flex-col overflow-hidden rounded-lg border border-transparent shadow-nextjs dark:shadow-nextjs-dark"
+            key={item.id}
+          >
+            <Image
+              width={480}
+              height={480}
+              className="object-cover object-center md:h-36 lg:h-60"
+              alt={`Cover Image for`}
+              src={item.image}
+            />
+            <div className="p-6">
               <div
-                className="mt-4 text-gray-600 italic font-semibold text-xs transition"
+                className="mt-4 prose mb-3 max-w-none text-gray-500 dark:text-gray-400"
                 data-relingo-block="true"
               >
                 {item.date}
               </div>
-              <div className="text-secondary-500 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
+              <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
                 {item.name}
-              </div>
+              </h2>
+              <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">
+                {item?.description}
+              </p>
             </div>
           </div>
         </Link>

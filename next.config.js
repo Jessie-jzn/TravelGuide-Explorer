@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
 const path = require('path');
 
 module.exports = {
@@ -18,6 +20,15 @@ module.exports = {
     }
 
     return config;
+  },
+  async rewrites() {
+    return [
+      // 将以/api开头的路径代理到OpenAI API
+      {
+        source: '/api/:path*',
+        destination: 'https://api.openai.com/:path*',
+      },
+    ];
   },
   logging: {
     fetches: {

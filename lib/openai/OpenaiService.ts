@@ -18,27 +18,35 @@ const openai = new OpenAI({
 });
 
 const handler = async (req, res) => {
-  if (req.method === 'POST') {
-    try {
-      //   const { prompt } = req.body;
-      const body = await req.json();
-      const question = getPrompt(body);
+  try {
+    //   const { prompt } = req.body;
 
-      debugger;
+    // const body = await req.json();
+    const question = getPrompt(req);
 
-      // 调用 OpenAI API
-      const response = await openai.chat.completions.create({
-        model: model,
-        messages: [{ role: 'user', content: question }],
-      });
+    const data = await fetch('/api/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // 添加你的 OpenAI API 密钥
+        Authorization: 'Bearer YOUR_OPENAI_API_KEY',
+      },
+      body: JSON.stringify({}),
+    });
+    debugger;
 
-      res.status(200).json({ result: response });
-    } catch (error) {
-      console.error('OpenAI API 错误:', error);
-      res.status(500).json({ error: '调用 OpenAI API 失败' });
-    }
-  } else {
-    res.status(405).json({ error: '方法不被允许' });
+    // 调用 OpenAI API
+    const response = await openai.chat.completions.create({
+      model: model,
+      messages: [{ role: 'user', content: question }],
+    });
+
+    debugger;
+
+    res.status(200).json({ result: response });
+  } catch (error) {
+    console.error('OpenAI API 错误:', error);
+    res.status(500).json({ error: '调用 OpenAI API 失败' });
   }
 };
 

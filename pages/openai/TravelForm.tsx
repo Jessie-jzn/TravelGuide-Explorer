@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { generateText } from '@/lib/openai/OpenaiService';
+import handler from '@/lib/openai/OpenaiService';
 
 interface FormValues {
   departureDate: string;
@@ -45,10 +45,21 @@ const TravelForm = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formValues),
+      body: JSON.stringify({
+        departureDate: '2023-07-01',
+        returnDate: '2023-07-15',
+        startingPoint: '北京',
+        destinationPoint: '上海',
+        travelType: 'Solo',
+        awayFromMassTourism: true,
+        activities: '徒步, 摄影',
+        preferredStopoverLocations: '南京, 苏州',
+      }),
     });
 
     const data = await res.json();
+    debugger;
+
     setResponse(data.result.choices[0].message.content);
   };
 
