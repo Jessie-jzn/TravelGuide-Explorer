@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import NotionService from '@/lib/notion/NotionServer';
 import { Post } from '@/lib/type';
 import { NotionRenderer } from 'react-notion-x';
+import Link from 'next/link';
 import * as API from '../api/guide';
 
 interface Props {
@@ -34,7 +35,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 const RenderPost = ({ post, redirect }: Props): JSX.Element => {
-  return <NotionRenderer recordMap={post} fullPage={true} darkMode={false} />;
+  return (
+    <NotionRenderer
+      recordMap={post}
+      fullPage={true}
+      darkMode={false}
+      components={{
+        nextImage: Image,
+        nextLink: Link,
+      }}
+    />
+  );
 };
 
 export default RenderPost;
