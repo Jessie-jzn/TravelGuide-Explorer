@@ -17,7 +17,7 @@ export const NavBarData = [
   {
     id: 1,
     title: '🏠首页',
-    uri: '/about',
+    uri: '/',
   },
   {
     id: 2,
@@ -47,6 +47,6 @@ export const NavBarData = [
   {
     id: 6,
     title: '☎️联系',
-    uri: '/contact',
+    uri: '/about',
   },
 ];

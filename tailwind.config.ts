@@ -7,6 +7,7 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    // './lib/**/*.{js,ts,tsx}',
   ],
   darkMode: 'class',
   theme: {
@@ -79,7 +80,7 @@ const config: Config = {
         spotify: '#1DB954',
         coral: '#EF596F',
       },
-      typography: (theme) => ({
+      typography: (theme: any) => ({
         DEFAULT: {
           css: {
             color: theme('colors.gray.700'),

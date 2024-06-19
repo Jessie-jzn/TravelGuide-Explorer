@@ -8,8 +8,6 @@ interface IndexProps {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  console.log('执行getStaticProps');
-
   const data = await API.getTravelGuideList();
 
   // 返回格式化后的数据

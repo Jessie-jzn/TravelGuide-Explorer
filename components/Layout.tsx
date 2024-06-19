@@ -30,12 +30,17 @@ const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
 
 export default Layout;
 
-const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
-  const router = useRouter();
+const isActivePath = (path: string, uri: string): boolean => {
+  if (uri === '/') {
+    return path === '/';
+  } else {
+    return path.startsWith(uri);
+  }
+};
 
-  const isActivePath = (path: string) => {
-    return router.pathname.startsWith(path);
-  };
+const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
+  const { pathname } = useRouter();
+
   return (
     <div className="flex justify-center items-center mt-16 mx-auto w-full max-w-7xl">
       <div className="h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10">
@@ -52,7 +57,7 @@ const Header: FC<MenuProps> = ({ menuList }: MenuProps) => {
       <div className="pointer-events-auto md:block ml-10 mr-10">
         <div className="flex rounded-full bg-white px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
           {menuList.map((item) => {
-            const isActive = isActivePath(item.uri);
+            const isActive = isActivePath(pathname, item.uri) ;
             return (
               <Link href={item.uri} key={item.id}>
                 <div
