@@ -3,6 +3,7 @@ import '../styles/main.css';
 import 'react-notion-x/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'katex/dist/katex.min.css';
+import 'tailwindcss/tailwind.css';
 import Layout from '@/components/Layout';
 import { MenuItem } from '@/lib/type';
 
