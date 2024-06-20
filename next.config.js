@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const path = require('path');
 
