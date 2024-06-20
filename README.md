@@ -19,7 +19,7 @@
 
 ## Website / 网站
 
-<a href="https://travelguide-explorer.com"><img src="https://raw.githubusercontent.com/Jessie-jzn/Next-Notion-Blog/main/public/images/travelguide.png" alt="TravelGuide Explorer Website" /></a>
+<a href="https://next-notion-blog-jessie-jzns-projects.vercel.app/"><img src="https://raw.githubusercontent.com/Jessie-jzn/Next-Notion-Blog/main/public/imags/image-website.png" alt="TravelGuide Explorer Website" /></a>
 
 ## Tech Stack / 技术栈
 
