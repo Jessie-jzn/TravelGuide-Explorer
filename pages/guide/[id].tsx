@@ -3,6 +3,7 @@ import NotionService from '@/lib/notion/NotionServer';
 import { Post } from '@/lib/type';
 import { NotionRenderer } from 'react-notion-x';
 import Link from 'next/link';
+import Image from 'next/image';
 import * as API from '../api/guide';
 
 interface Props {

@@ -30,9 +30,9 @@ const GuideCard = ({ item }: GuideCardProp) => {
           <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
             {item.name}
           </h2>
-          <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">
+          <div className="w-full h-12 whitespace-normal text-ellipsis overflow-hidden prose mb-3 text-gray-500 dark:text-gray-400">
             {item?.description}
-          </p>
+          </div>
           <div className="flex">
             {item.tags?.map((t: string) => (
               <div

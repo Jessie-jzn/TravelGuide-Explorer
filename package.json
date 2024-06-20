@@ -9,6 +9,12 @@
     "lint": "next lint",
     "prettier": "prettier --write ."
   },
+  "prettier": {
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@notionhq/client": "^2.2.15",
