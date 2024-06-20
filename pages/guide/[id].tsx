@@ -5,12 +5,8 @@ import { NotionRenderer } from 'react-notion-x';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as API from '../api/guide';
+import React from 'react';
 
-interface Props {
-  post: Post;
-  redirect?: string;
-  // preview: boolean;
-}
 const notionService = new NotionService();
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -35,7 +31,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: true,
   };
 };
-const RenderPost = ({ post, redirect }: Props): JSX.Element => {
+const RenderPost = ({ post }: any): React.JSX.Element => {
+  console.log('postpostpostpost', post)
   return (
     <NotionRenderer
       recordMap={post}

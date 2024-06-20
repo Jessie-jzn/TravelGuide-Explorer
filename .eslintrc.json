@@ -1,6 +1,6 @@
 {
   "extends": [
-    "plugin:storybook/recommended", // 新加入
+    // "plugin:storybook/recommended", // 新加入
     "next",
     "next/core-web-vitals",
     "eslint:recommended"
@@ -14,7 +14,7 @@
       "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
       "rules": {
         // example of overriding a rule
-        "storybook/hierarchy-separator": "error"
+        // "storybook/hierarchy-separator": "error"
       }
     }
   ],

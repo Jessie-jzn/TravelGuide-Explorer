@@ -53,6 +53,10 @@ module.exports = {
         protocol: 'https',
         hostname: '*.aglty.**',
       },
+      {
+        protocol: 'https',
+        hostname: '*.notion.**',
+      },
     ],
   },
 };

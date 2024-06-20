@@ -2,17 +2,10 @@ import { Client } from '@notionhq/client';
 import { NotionAPI } from 'notion-client';
 import {
   QueryDatabaseResponse,
-  PageObjectResponse,
   BlockObjectResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 
 import { NOTION_TOKEN } from '../constants';
-
-// // 获取环境变量
-// const guideDatabaseId = process.env.NOTION_GUIDE_ID as string;
-// const categoriesDatabaseId = process.env.NOTION_CATEGORIES_ID as string;
-// const locationsDatabaseId = process.env.NOTION_LOCATIONS_ID as string;
-// console.log('NOTION_TOKEN', NOTION_TOKEN);
 
 if (!NOTION_TOKEN) {
   throw new Error('NOTION_TOKEN is not defined');
@@ -52,6 +45,7 @@ class NotionService {
   async getPage(pageId: string) {
     try {
       const page = await this.notionAPI.getPage(pageId);
+
       return page;
     } catch (error: any) {
       console.error('Error fetching page:', error.body || error);

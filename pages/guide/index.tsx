@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Index = ({ posts }: IndexProps): JSX.Element => {
+const Index = ({ posts }: IndexProps): React.JSX.Element => {
   return (
     <div className="grid sm:gap-8 sm:grid-cols-2 lg:grid-cols-3 pt-8">
       {posts.map((item: Post) => (

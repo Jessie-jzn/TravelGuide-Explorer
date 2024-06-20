@@ -8,3 +8,8 @@ export const getTravelGuideList = async () => {
   const res = await notionService.getDatabase(NOTION_GUIDE_ID);
   return formatDatabase(res);
 };
+
+export const getTravelGuideLists = async () => {
+  const res = await notionService.getDatabase(NOTION_GUIDE_ID);
+  return res;
+};

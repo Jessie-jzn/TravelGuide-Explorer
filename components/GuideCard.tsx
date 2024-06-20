@@ -18,7 +18,7 @@ const GuideCard = ({ item }: GuideCardProp) => {
           height={480}
           className="object-cover object-center md:h-36 lg:h-60"
           alt={`Cover Image for`}
-          src={item.image}
+          src={item.cover || item.image}
         />
         <div className="p-6">
           <div

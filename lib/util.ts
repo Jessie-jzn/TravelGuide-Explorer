@@ -1,4 +1,3 @@
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 /**
  * 格式化日期
  * @timestampString 2024-02-22T15:22:31
@@ -77,7 +76,7 @@ export const formatDatabase = (pages: any) => {
   return pages.map((page: any) => {
     const nameProperty = page.properties['Name'];
     const descriptionProperty = page.properties['Description'];
-    const imageProperty = page.properties['Image'];
+  
     const dateProperty = page.properties['Date'];
     const uriProperty = page.properties['Uri'];
     const tagsProperty = page.properties['Tags'];
@@ -90,8 +89,6 @@ export const formatDatabase = (pages: any) => {
       descriptionProperty?.type === 'rich_text'
         ? descriptionProperty.rich_text[0]?.plain_text || ''
         : '';
-    const image =
-      imageProperty?.type === 'files' ? imageProperty.files[0]?.name || '' : '';
     const date =
       dateProperty?.type === 'date' ? dateProperty.date?.start || '' : '';
     const uri =
@@ -103,9 +100,13 @@ export const formatDatabase = (pages: any) => {
         ? tagsProperty.multi_select.map((tag: any) => tag.name)
         : [];
 
+    const cover = page?.cover?.external?.url
+
+
     return {
       id: page.id,
       name,
+      cover,
       description,
       url: page.url,
       date,
