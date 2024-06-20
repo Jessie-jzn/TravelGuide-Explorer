@@ -1,5 +1,6 @@
 import { ThemeProvider } from 'next-themes';
 import '../styles/main.css';
+import '../styles/tailwind.css';
 import 'react-notion-x/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'katex/dist/katex.min.css';
