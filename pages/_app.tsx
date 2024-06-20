@@ -1,10 +1,11 @@
 import { ThemeProvider } from 'next-themes';
-import '../styles/main.css';
-import '../styles/tailwind.css';
+import '../styles/main.css'
+import '../styles/globals.css';
 import 'react-notion-x/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'katex/dist/katex.min.css';
 import 'tailwindcss/tailwind.css';
+import '../build.css'
 
 import Layout from '@/components/Layout';
 import { MenuItem } from '@/lib/type';

@@ -1,13 +1,12 @@
-import type { Config } from 'tailwindcss';
+/** @type {import('tailwindcss').Config} */
 const { fontFamily } = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
-const config: Config = {
+module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    // './lib/**/*.{js,ts,tsx}',
   ],
   darkMode: 'class',
   theme: {
@@ -80,7 +79,7 @@ const config: Config = {
         spotify: '#1DB954',
         coral: '#EF596F',
       },
-      typography: (theme: any) => ({
+      typography: (theme) => ({
         DEFAULT: {
           css: {
             color: theme('colors.gray.700'),
@@ -215,4 +214,3 @@ const config: Config = {
   },
   plugins: [],
 };
-export default config;
