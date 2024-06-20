@@ -11,9 +11,6 @@ interface IndexProps {
 export const getStaticProps: GetStaticProps = async () => {
   const data = await API.getTravelGuideList();
 
-  // 返回格式化后的数据
-  console.log('formattedGuides', data);
-
   return {
     props: {
       posts: data,

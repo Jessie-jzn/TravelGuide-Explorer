@@ -32,7 +32,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 const RenderPost = ({ post }: any): React.JSX.Element => {
-  console.log('postpostpostpost', post)
   return (
     <NotionRenderer
       recordMap={post}
