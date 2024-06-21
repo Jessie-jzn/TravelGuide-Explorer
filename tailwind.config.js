@@ -10,7 +10,16 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
+    screens: {
+      sm: { max: '430px' },
+      // => @media (min-width: 640px and max-width: 767px) { ... }
+      md: { min: '431px', max: '1023px' },
+      lg: { min: '1024px' },
+    },
     extend: {
+      zIndex: {
+        201: 201,
+      },
       keyframes: {
         'wave-animation': {
           '0%': { transform: 'rotate(0deg)' },

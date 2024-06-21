@@ -8,11 +8,12 @@ interface GuideCardProp {
 
 const GuideCard = ({ item }: GuideCardProp) => {
   return (
-    <Link href={`/guide/${item.id}`}>
-      <div
-        className="flex h-full flex-col overflow-hidden rounded-lg border border-transparent shadow-nextjs dark:shadow-nextjs-dark"
-        key={item.id}
-      >
+
+    <div
+      className="flex h-full flex-col overflow-hidden rounded-lg border border-transparent shadow-nextjs dark:shadow-nextjs-dark hover:translate-y-1 transition-all duration-300 active:translate-y-1"
+      key={item.id}
+    >
+      <Link href={`/guide/${item.id}`}>
         <Image
           width={480}
           height={480}
@@ -44,8 +45,9 @@ const GuideCard = ({ item }: GuideCardProp) => {
             ))}
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div >
+
   );
 };
 
