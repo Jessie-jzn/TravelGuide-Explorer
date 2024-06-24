@@ -20,7 +20,7 @@ export const formatTimestampToDate = (timestampString: string): string => {
  */
 export const formatDate = (
   date: string | Date,
-  locale: string = 'zh-CN'
+  locale: string = 'zh-CN',
 ): string => {
   if (!date || !locale) return date ? date.toString() : '';
 
@@ -76,10 +76,12 @@ export const formatDatabase = (pages: any) => {
   return pages.map((page: any) => {
     const nameProperty = page.properties['Name'];
     const descriptionProperty = page.properties['Description'];
-  
+
     const dateProperty = page.properties['Date'];
     const uriProperty = page.properties['Uri'];
     const tagsProperty = page.properties['Tags'];
+
+    console.log('page', page);
 
     const name =
       nameProperty?.type === 'title'
@@ -100,8 +102,7 @@ export const formatDatabase = (pages: any) => {
         ? tagsProperty.multi_select.map((tag: any) => tag.name)
         : [];
 
-    const cover = page?.cover?.external?.url
-
+    const cover = page?.cover?.external?.url;
 
     return {
       id: page.id,

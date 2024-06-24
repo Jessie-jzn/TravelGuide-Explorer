@@ -9,7 +9,7 @@ interface GuideCardProp {
 const GuideCard = ({ item }: GuideCardProp) => {
   return (
     <div
-      className="flex h-full flex-col overflow-hidden rounded-lg border border-transparent shadow-nextjs dark:shadow-nextjs-dark hover:translate-y-1 transition-all duration-300 active:translate-y-1"
+      className="flex h-full flex-col overflow-hidden rounded-lg shadow-nextjs dark:shadow-nextjs-dark hover:translate-y-1 transition-all duration-300 active:translate-y-1"
       key={item.id}
     >
       <Link href={`/guide/${item.id}`}>
