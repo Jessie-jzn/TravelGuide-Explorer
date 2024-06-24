@@ -4,6 +4,7 @@ import ThemeSwitch from './ThemeSwitch';
 import { useRouter } from 'next/router';
 import { MenuItem } from '../lib/type';
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 interface MenuProps {
   menuList: MenuItem[];
@@ -26,7 +27,7 @@ const Header = ({ menuList }: MenuProps) => {
   };
 
   return (
-    <div className="flex justify-between items-center mt-16 mx-auto w-full">
+    <div className="flex lg:justify-center md:justify-center sm:justify-between items-center mt-16 mx-auto w-full max-w-7xl lg:px-8 sm:px-5">
       <div className="flex items-center">
         <div className="h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10">
           <Link href="/">
@@ -41,8 +42,8 @@ const Header = ({ menuList }: MenuProps) => {
         </div>
         <div className="ml-2 sm:hidden">Jessie的旅行日记</div>
       </div>
-      <div className="flex">
-        <div className="pointer-events-auto sm:hidden md:block">
+      <div className="flex max-w-2xl lg:max-w-5xl">
+        <div className="pointer-events-auto sm:hidden block px-10">
           <div className="flex rounded-full bg-white px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
             {menuList.map((item) => {
               const isActive = isActivePath(pathname, item.uri);
@@ -64,7 +65,7 @@ const Header = ({ menuList }: MenuProps) => {
             })}
           </div>
         </div>
-        <div className="pointer-events-auto lg:hidden md:hidden sm:block">
+        <div className="pointer-events-auto hidden sm:block">
           <button
             className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20"
             type="button"
@@ -128,6 +129,9 @@ const Header = ({ menuList }: MenuProps) => {
 
         <div className="flex space-x-4">
           <ThemeSwitch />
+        </div>
+        <div className="flex space-x-4">
+          <Analytics />
         </div>
       </div>
     </div>

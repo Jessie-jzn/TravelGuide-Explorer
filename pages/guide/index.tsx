@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Index = ({ posts }: IndexProps): React.JSX.Element => {
   return (
-    <div className="grid sm:gap-8 gap-y-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10">
+    <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5  px-4 sm:px-8 lg:px-8">
       {posts.map((item: Post) => (
         <GuideCard item={item} key={item.id} />
       ))}

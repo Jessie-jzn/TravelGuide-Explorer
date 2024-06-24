@@ -22,7 +22,7 @@ const Home = ({ posts }: IndexProps) => {
   return (
     <>
       <Meta title="Jessie's Travel Guide" />
-      <div className="flex-auto mt-10 mx-auto w-full px-4 sm:px-8 lg:px-8">
+      <div className="flex-auto mx-auto w-full px-4 sm:px-8 lg:px-8">
         {/* 个人自我介绍top */}
         <div className="mx-auto max-w-2xl lg:max-w-5xl">
           <h1

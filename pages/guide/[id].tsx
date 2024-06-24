@@ -31,17 +31,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: true,
   };
 };
+
 const RenderPost = ({ post }: any): React.JSX.Element => {
   return (
-    <NotionRenderer
-      recordMap={post}
-      fullPage={true}
-      darkMode={false}
-      components={{
-        nextImage: Image,
-        nextLink: Link,
-      }}
-    />
+    <div className="flex-auto mx-auto w-full px-4 sm:px-8 lg:px-8 max-w-2xl lg:max-w-7xl">
+      <NotionRenderer
+        recordMap={post}
+        fullPage={true}
+        darkMode={false}
+        components={{
+          nextImage: Image,
+          nextLink: Link,
+        }}
+      />
+    </div>
   );
 };
 
