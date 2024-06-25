@@ -1,3 +1,4 @@
+import { LANG } from './constants';
 /**
  * 格式化日期
  * @timestampString 2024-02-22T15:22:31
@@ -67,6 +68,22 @@ export const deepClone = <T>(obj: T): T => {
     return obj;
   }
 };
+const extractValue = (property: any) => {
+  switch (property?.type) {
+    case 'title':
+      return property.title[0]?.plain_text || '';
+    case 'rich_text':
+      return property.rich_text[0]?.plain_text || '';
+    case 'date':
+      return property.date?.start || '';
+    case 'multi_select':
+      return property.multi_select.map((tag: any) => tag.name);
+    case 'relation':
+      return property.relation;
+    default:
+      return '';
+  }
+};
 /**
  * // 将从 Notion 数据库获取的结果格式化为表格样式
  * @param pages
@@ -74,47 +91,80 @@ export const deepClone = <T>(obj: T): T => {
  */
 export const formatDatabase = (pages: any) => {
   return pages.map((page: any) => {
-    const nameProperty = page.properties['Name'];
-    const descriptionProperty = page.properties['Description'];
-
-    const dateProperty = page.properties['Date'];
-    const uriProperty = page.properties['Uri'];
-    const tagsProperty = page.properties['Tags'];
-
     console.log('page', page);
+    // 提取 properties 的值
+    const properties = page.properties;
 
-    const name =
-      nameProperty?.type === 'title'
-        ? nameProperty.title[0]?.plain_text || ''
-        : '';
-    const description =
-      descriptionProperty?.type === 'rich_text'
-        ? descriptionProperty.rich_text[0]?.plain_text || ''
-        : '';
-    const date =
-      dateProperty?.type === 'date' ? dateProperty.date?.start || '' : '';
-    const uri =
-      uriProperty?.type === 'rich_text'
-        ? uriProperty.rich_text[0]?.plain_text || ''
-        : '';
-    const tags =
-      tagsProperty?.type === 'multi_select'
-        ? tagsProperty.multi_select.map((tag: any) => tag.name)
-        : [];
+    console.log('properties', properties);
+    // 遍历 properties 并提取每个属性的值
+    const extractedProperties = Object.keys(properties).reduce(
+      (acc, key) => {
+        const property = properties[key];
 
-    const cover = page?.cover?.external?.url;
+        let value;
+
+        switch (property.type) {
+          case 'title':
+            value = property.title[0]?.plain_text || '';
+            break;
+          case 'rich_text':
+            value = property.rich_text[0]?.plain_text || '';
+            break;
+          case 'date':
+            value = property.date?.start || '';
+            break;
+          case 'multi_select':
+            value = property.multi_select.map((tag: any) => tag.name);
+            break;
+          case 'relation':
+            value = property.relation.map((rel: any) => rel.id);
+            break;
+          default:
+            value = null;
+        }
+
+        acc[key] = value;
+        return acc;
+      },
+      {} as { [key: string]: any },
+    );
+
+    const cover = page?.cover?.external?.url || null;
+
+    console.log('extractedProperties', extractedProperties);
 
     return {
       id: page.id,
-      name,
       cover,
-      description,
       url: page.url,
-      date,
-      uri,
-      tags,
       image:
         'https://cdn.aglty.io/blog-starter-2021-template/posts/virtual-tour_20210331171226_0.jpg?format=auto&w=480',
+      ...extractedProperties,
     };
   });
+};
+
+export const formatPostBlock = (blockMap: any, pageId: string) => {
+  const postInfo = blockMap?.block?.[pageId].value;
+  return {
+    id: pageId,
+    type: postInfo.type,
+    category: '',
+    tags: [],
+    title: postInfo?.properties?.title?.[0]?.[0],
+    status: 'Published',
+    createdTime: formatDate(new Date(postInfo.created_time).toString(), LANG),
+    lastEditedDay: formatDate(
+      new Date(postInfo?.last_edited_time).toString(),
+      LANG,
+    ),
+    fullWidth: postInfo?.fullWidth || false,
+    date: {
+      start_date: formatDate(
+        new Date(postInfo?.last_edited_time).toString(),
+        LANG,
+      ),
+    },
+    blockMap,
+  };
 };

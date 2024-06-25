@@ -9,7 +9,9 @@ interface IndexProps {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await API.getTravelGuideList();
+  const data = await API.getTravelGuideListByCountry();
+
+  debugger;
 
   return {
     props: {

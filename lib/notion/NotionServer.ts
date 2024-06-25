@@ -1,12 +1,8 @@
 import { Client } from '@notionhq/client';
 import { NotionAPI } from 'notion-client';
-import {
-  QueryDatabaseResponse,
-  BlockObjectResponse,
-} from '@notionhq/client/build/src/api-endpoints';
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 import { NOTION_TOKEN } from '../constants';
-
 if (!NOTION_TOKEN) {
   throw new Error('NOTION_TOKEN is not defined');
 }
@@ -25,7 +21,7 @@ class NotionService {
    * @returns Promise<QueryDatabaseResponse['results']>
    */
   async getDatabase(
-    databaseId: string
+    databaseId: string,
   ): Promise<QueryDatabaseResponse['results']> {
     try {
       const response = await this.client.databases.query({
@@ -50,31 +46,6 @@ class NotionService {
     } catch (error: any) {
       console.error('Error fetching page:', error.body || error);
       throw new Error('Failed to fetch page');
-    }
-  }
-  /**
-   * 获取页面的块内容
-   * @param pageId - 页面 ID
-   * @returns Promise<BlockObjectResponse[]>
-   */
-  async getPageBlocks(pageId: string): Promise<BlockObjectResponse[]> {
-    try {
-      const blocks: BlockObjectResponse[] = [];
-      let cursor: string | undefined;
-
-      do {
-        const response = await this.client.blocks.children.list({
-          block_id: pageId,
-          start_cursor: cursor,
-        });
-        blocks.push(...(response.results as BlockObjectResponse[]));
-        cursor = response.next_cursor as string | undefined;
-      } while (cursor);
-
-      return blocks;
-    } catch (error: any) {
-      console.error('Error fetching page blocks:', error.body || error);
-      throw new Error('Failed to fetch page blocks');
     }
   }
 }
