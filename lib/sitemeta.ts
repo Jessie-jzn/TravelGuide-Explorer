@@ -11,5 +11,6 @@ const siteMeta = {
   github: 'https://github.com/Jessie-jzn',
   locale: 'zh-CN',
   siteUrl: 'https://next-notion-blog-gamma.vercel.app/',
+  twitter: '',
 };
-module.exports = siteMeta;
+export default siteMeta;
