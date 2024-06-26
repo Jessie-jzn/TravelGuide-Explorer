@@ -39,6 +39,8 @@ export const getStaticProps: GetStaticProps = async () => {
 const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
   const [searchValue, setSearchValue] = useState('');
 
+  console.log('guidesByCountry', guidesByCountry);
+
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700  px-4 sm:px-8 lg:px-8">
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
@@ -87,7 +89,7 @@ const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
               </h3>
               <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 border-none">
                 {item.guides.map((post: Post) => (
-                  <GuideCard post={post} key={item.id} />
+                  <GuideCard post={post} key={post.id} />
                 ))}
               </div>
             </div>
