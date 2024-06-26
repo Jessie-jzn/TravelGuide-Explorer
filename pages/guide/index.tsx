@@ -2,26 +2,41 @@ import { useState } from 'react';
 import { GetStaticProps } from 'next';
 import * as API from '../api/guide';
 import GuideCard from '@/components/GuideCard';
-import { Post } from '@/lib/type';
+import { Post, Country } from '@/lib/type';
 
 interface IndexProps {
-  posts: Post[];
+  guidesByCountry: Country[];
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await API.getTravelGuideListByCountry();
+const getGuidesByCountry = (guides: Post[], countries: Country[]) => {
+  const res = countries.map((country) => {
+    return {
+      ...country,
+      guides: guides.filter((guide) => country.guide.includes(guide.id)),
+    };
+  });
+  return res;
+};
 
-  debugger;
+export const getStaticProps: GetStaticProps = async () => {
+  const [guideList, countryList] = await Promise.all([
+    API.getTravelGuideList(),
+    API.getCountryList(),
+  ]);
+
+  // 提取包含指南的国家列表
+
+  const guidesByCountry = getGuidesByCountry(guideList, countryList);
 
   return {
     props: {
-      posts: data,
+      guidesByCountry: guidesByCountry,
     },
     revalidate: 10,
   };
 };
 
-const Index = ({ posts }: IndexProps): React.JSX.Element => {
+const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
   const [searchValue, setSearchValue] = useState('');
 
   return (
@@ -62,11 +77,22 @@ const Index = ({ posts }: IndexProps): React.JSX.Element => {
         </div>
       </div>
 
-      <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-none">
-        {posts.map((item: Post) => (
-          <GuideCard item={item} key={item.id} />
-        ))}
-      </div>
+      {guidesByCountry.map(
+        (item: Country) =>
+          !!item.guides.length && (
+            <div key={item.id} className="w-full pt-8 pb-8">
+              <h3 className="mb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100">
+                {item.icon}
+                {item.name}
+              </h3>
+              <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 border-none">
+                {item.guides.map((post: Post) => (
+                  <GuideCard post={post} key={item.id} />
+                ))}
+              </div>
+            </div>
+          ),
+      )}
     </div>
   );
 };

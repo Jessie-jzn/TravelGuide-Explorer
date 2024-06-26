@@ -68,22 +68,6 @@ export const deepClone = <T>(obj: T): T => {
     return obj;
   }
 };
-const extractValue = (property: any) => {
-  switch (property?.type) {
-    case 'title':
-      return property.title[0]?.plain_text || '';
-    case 'rich_text':
-      return property.rich_text[0]?.plain_text || '';
-    case 'date':
-      return property.date?.start || '';
-    case 'multi_select':
-      return property.multi_select.map((tag: any) => tag.name);
-    case 'relation':
-      return property.relation;
-    default:
-      return '';
-  }
-};
 /**
  * // 将从 Notion 数据库获取的结果格式化为表格样式
  * @param pages
@@ -91,11 +75,9 @@ const extractValue = (property: any) => {
  */
 export const formatDatabase = (pages: any) => {
   return pages.map((page: any) => {
-    console.log('page', page);
     // 提取 properties 的值
     const properties = page.properties;
 
-    console.log('properties', properties);
     // 遍历 properties 并提取每个属性的值
     const extractedProperties = Object.keys(properties).reduce(
       (acc, key) => {
@@ -130,8 +112,6 @@ export const formatDatabase = (pages: any) => {
     );
 
     const cover = page?.cover?.external?.url || null;
-
-    console.log('extractedProperties', extractedProperties);
 
     return {
       id: page.id,

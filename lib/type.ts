@@ -14,5 +14,18 @@ export interface Post {
   date?: string;
   image: string;
   tags?: any;
-  cover?:string
+  cover?: string;
+  country: string[];
+}
+
+export interface Country {
+  id: string;
+  cover: string | null;
+  url: string;
+  image: string;
+  guide: string[];
+  title: string;
+  icon: string;
+  name: string;
+  guides: Post[];
 }

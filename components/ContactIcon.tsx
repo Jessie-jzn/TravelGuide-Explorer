@@ -4,7 +4,7 @@ const ContactIcon = () => {
       <a
         className="group -m-1 p-1"
         aria-label="Follow on Envelope"
-        href="mailto:znchenjiax@foxmail.com?subject=Notion Blog"
+        href="mailto:znjessie858@gmail.com?subject=Notion Blog"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

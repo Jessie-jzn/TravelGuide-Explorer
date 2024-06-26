@@ -13,7 +13,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postId = params?.id as string;
   const post = await notionService.getPage(postId);
 
-  console.log('post', post);
   return {
     props: {
       post: post,
