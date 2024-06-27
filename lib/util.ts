@@ -83,8 +83,6 @@ export const formatDatabase = (pages: any) => {
       (acc, key) => {
         const property = properties[key];
 
-        console.log('property', property);
-
         let value;
 
         switch (property.type) {
@@ -116,15 +114,13 @@ export const formatDatabase = (pages: any) => {
       {} as { [key: string]: any },
     );
 
-    console.log('extractedProperties', extractedProperties);
     const cover = page?.cover?.external?.url || null;
 
     return {
       id: page.id,
-      cover,
-      url: page.url,
-      image:
+      cover:
         'https://cdn.aglty.io/blog-starter-2021-template/posts/virtual-tour_20210331171226_0.jpg?format=auto&w=480',
+      url: page.url,
       ...extractedProperties,
     };
   });
