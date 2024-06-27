@@ -25,7 +25,8 @@ export const getStaticProps: GetStaticProps = async () => {
   //   API.getCountryList(),
   // ]);
   const guideList = await API.getTravelGuideList();
-
+  const countryList = await API.getCountryList();
+  console.log('countryList', countryList);
   // 提取包含指南的国家列表
   // const guidesByCountry = getGuidesByCountry(guideList, countryList);
 
