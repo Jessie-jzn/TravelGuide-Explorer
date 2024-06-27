@@ -110,7 +110,7 @@ export const formatDatabase = (pages: any) => {
             value = undefined;
         }
 
-        acc[key] = value;
+        acc[key.toLowerCase()] = value;
         return acc;
       },
       {} as { [key: string]: any },
