@@ -119,6 +119,7 @@ export const formatDatabase = (pages: any) => {
     return {
       id: page.id,
       cover:
+        cover ||
         'https://cdn.aglty.io/blog-starter-2021-template/posts/virtual-tour_20210331171226_0.jpg?format=auto&w=480',
       url: page.url,
       ...extractedProperties,

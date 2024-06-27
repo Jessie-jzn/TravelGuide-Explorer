@@ -10,7 +10,7 @@ const siteMeta = {
   email: 'znjessie858@gmail.com',
   github: 'https://github.com/Jessie-jzn',
   locale: 'zh-CN',
-  siteUrl: 'https://next-notion-blog-gamma.vercel.app/',
+  siteUrl: 'www.jessieontheroad.com/',
   twitter: '',
 };
 export default siteMeta;

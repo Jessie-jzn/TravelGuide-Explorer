@@ -56,6 +56,10 @@ module.exports = {
         protocol: 'https',
         hostname: '*.notion.**',
       },
+      {
+        protocol: 'https',
+        hostname: '*.jessieontheroad.**',
+      },
     ],
   },
 };
