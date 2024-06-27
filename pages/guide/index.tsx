@@ -6,6 +6,7 @@ import { Post, Country } from '@/lib/type';
 
 interface IndexProps {
   guidesByCountry: Country[];
+  posts: Post[];
 }
 
 const getGuidesByCountry = (guides: Post[], countries: Country[]) => {
@@ -19,24 +20,26 @@ const getGuidesByCountry = (guides: Post[], countries: Country[]) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const [guideList, countryList] = await Promise.all([
-    API.getTravelGuideList(),
-    API.getCountryList(),
-  ]);
+  // const [guideList=[], countryList] = await Promise.all([
+  //   API.getTravelGuideList(),
+  //   API.getCountryList(),
+  // ]);
+  const guideList = await API.getTravelGuideList();
 
   // 提取包含指南的国家列表
-
-  const guidesByCountry = getGuidesByCountry(guideList, countryList);
+  // const guidesByCountry = getGuidesByCountry(guideList, countryList);
 
   return {
     props: {
-      guidesByCountry: guidesByCountry,
+      // guidesByCountry: guidesByCountry,
+      posts: guideList,
+      guidesByCountry: [],
     },
     revalidate: 10,
   };
 };
 
-const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
+const Index = ({ guidesByCountry, posts }: IndexProps): React.JSX.Element => {
   const [searchValue, setSearchValue] = useState('');
 
   console.log('guidesByCountry', guidesByCountry);
@@ -79,7 +82,7 @@ const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
         </div>
       </div>
 
-      {guidesByCountry.map(
+      {/* {guidesByCountry.map(
         (item: Country) =>
           !!item.guides.length && (
             <div key={item.id} className="w-full pt-8 pb-8">
@@ -94,7 +97,12 @@ const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
               </div>
             </div>
           ),
-      )}
+      )} */}
+      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 border-none">
+        {posts.map((post: Post) => (
+          <GuideCard post={post} key={post.id} />
+        ))}
+      </div>
     </div>
   );
 };
