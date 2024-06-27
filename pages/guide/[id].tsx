@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import NotionService from '@/lib/notion/NotionServer';
 import { Post } from '@/lib/type';
 import { NotionRenderer } from 'react-notion-x';
+// import { idToUuid } from 'notion-utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as API from '../api/guide';
@@ -11,6 +12,7 @@ const notionService = new NotionService();
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postId = params?.id as string;
+  // console.log('idToUuid(postId)', idToUuid(postId));
   const post = await notionService.getPage(postId);
 
   return {

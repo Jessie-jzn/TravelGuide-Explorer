@@ -30,6 +30,7 @@
     "next-themes": "^0.2.1",
     "node-fetch": "^3.3.2",
     "notion-client": "^6.16.0",
+    "notion-utils": "^6.16.0",
     "npm": "^10.2.4",
     "openai": "^4.48.1",
     "postcss": "^8.4.38",
