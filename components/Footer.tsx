@@ -7,8 +7,8 @@ interface MenuProps {
 }
 const Footer = ({ menuList }: MenuProps) => {
   return (
-    <div className="box-border flex flex-col items-center p-16 w-fullbg-[#F6F6F7] border-t border-[#E8E8EA] dark:border-zinc-900 dark:bg-zinc-800">
-      <div className="flex flex-wrap justify-between w-full lg:max-w-7xl pb-8">
+    <div className="box-border flex flex-col items-center p-16 xl:px-80 lg:px-40 md:px-10 w-fullbg-[#F6F6F7] border-t border-[#E8E8EA] dark:border-zinc-900 dark:bg-zinc-800">
+      <div className="flex flex-wrap justify-between w-full pb-8">
         <div className="flex flex-col max-w-xs">
           <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
             关于
@@ -74,7 +74,7 @@ const Footer = ({ menuList }: MenuProps) => {
           </form>
         </div>
       </div>
-      <div className="w-full max-w-2xl lg:max-w-7xl pt-8 sm:pt-4 sm:pb-4 border-t dark:border-zinc-900 border-[#E8E8EA] dark:bg-zinc-800">
+      <div className="w-full pt-8 sm:pt-4 sm:pb-4 border-t pb-16 dark:border-zinc-900 border-[#E8E8EA] dark:bg-zinc-800">
         <div className="text-sm text-zinc-400 dark:text-zinc-500">
           © {new Date().getFullYear()}, Built with Jessie &#128293;{' '}
         </div>

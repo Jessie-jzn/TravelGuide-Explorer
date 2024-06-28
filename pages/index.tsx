@@ -4,8 +4,10 @@ import Image from 'next/image';
 import * as API from './api/guide';
 import { GetStaticProps } from 'next';
 import { Post } from '@/lib/type';
-import PostItemCard from '@/components/PostItemCard';
+// import PostItemCard from '@/components/PostItemCard';
 import backgroundImage from '@/public/imags/index.jpg';
+// import PostItemHome from '@/components/PostItemHome';
+import GuideCard from '@/components/GuideCard';
 
 interface IndexProps {
   posts: Post[];
@@ -45,10 +47,12 @@ const Home = ({ posts }: IndexProps) => {
         </div>
 
         {/* 最近post及订阅 */}
-        <div className="mx-auto max-w-2xl lg:max-w-5xl mt-10">
-          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 border-none"></div>
-          <div className="flex flex-col gap-16">
-            {posts?.map((item) => <PostItemCard item={item} key={item.id} />)}
+        <div className="mx-auto w-full mt-10 mb-40">
+          <div className="mb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100">
+            最新攻略
+          </div>
+          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 border-none">
+            {posts?.map((item) => <GuideCard post={item} key={item.id} />)}
           </div>
         </div>
       </div>
