@@ -14,7 +14,8 @@ module.exports = {
       sm: { max: '430px' },
       // => @media (min-width: 640px and max-width: 767px) { ... }
       md: { min: '431px', max: '1023px' },
-      lg: { min: '1024px' },
+      lg: { min: '1024px', max: '1440px' },
+      xl: { min: '1441px' },
     },
     extend: {
       zIndex: {
