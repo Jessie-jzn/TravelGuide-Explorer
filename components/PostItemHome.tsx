@@ -1,4 +1,4 @@
-const PostItemHome = ({ item }) => {
-  return <div>111</div>;
+const PostItemHome = () => {
+  return <div></div>;
 };
 export default PostItemHome;
