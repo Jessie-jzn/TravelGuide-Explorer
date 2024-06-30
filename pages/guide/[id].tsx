@@ -5,7 +5,7 @@ import { NotionRenderer } from 'react-notion-x';
 // import { idToUuid } from 'notion-utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import * as API from '../api/guide';
+import * as API from '@/lib/api/guide';
 import React from 'react';
 
 const notionService = new NotionService();
@@ -37,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const RenderPost = ({ post }: any): React.JSX.Element => {
   return (
-    <div className="flex-auto mx-auto w-full px-4 sm:px-8 lg:px-8 max-w-2xl lg:max-w-7xl">
+    <div className="flex-auto mx-auto w-full">
       <NotionRenderer
         recordMap={post}
         fullPage={true}

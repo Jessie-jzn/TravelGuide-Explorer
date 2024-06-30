@@ -1,11 +1,25 @@
+'use client';
 import React from 'react';
 import Link from 'next/link';
-
-import { MenuItem } from '../lib/type';
+import { GetStaticProps } from 'next';
+import * as API from '@/lib/api/guide';
+import { MenuItem, Country } from '@/lib/type';
 interface MenuProps {
   menuList: MenuItem[];
+  countryList?: Country[];
 }
-const Footer = ({ menuList }: MenuProps) => {
+// export const getStaticProps: GetStaticProps = async () => {
+//   const data = await API.getCountryList();
+
+//   return {
+//     props: {
+//       countryList: data,
+//     },
+//     revalidate: 10,
+//   };
+// };
+const Footer = ({ menuList, countryList = [] }: MenuProps) => {
+  console.log('countryList', countryList);
   return (
     <div className="box-border flex flex-col items-center p-16 xl:px-80 lg:px-40 md:px-10 w-fullbg-[#F6F6F7] border-t border-[#E8E8EA] dark:border-zinc-900 dark:bg-zinc-800">
       <div className="flex flex-wrap justify-between w-full pb-8">
@@ -17,11 +31,11 @@ const Footer = ({ menuList }: MenuProps) => {
             我的足迹遍布中国每一个省份，以及日本、泰国、马来西亚等国。我热衷探索各地的文化、历史和美食，并与大家分享实用的旅行攻略和有趣的故事。旅行不仅是探索未知，更是发现自我。期待与你们一起开启新的冒险之旅！
           </p>
           <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-400">
-            <strong>Email :</strong> info@jstemplate.net
+            <strong>Email :</strong> znjessie858@gmail.com
           </p>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+          {/* <p className="text-sm text-zinc-600 dark:text-zinc-400">
             <strong>Phone :</strong> 880 123 456 789
-          </p>
+          </p> */}
         </div>
         <div className="flex flex-col sm:mt-8">
           <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
@@ -50,7 +64,7 @@ const Footer = ({ menuList }: MenuProps) => {
             <li>Sports</li>
           </ul>
         </div>
-        <div className="flex flex-col sm:mt-8">
+        <div className="flex flex-col sm:mt-8 md:mt-8 lg:mt-8">
           <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
             订阅
           </h2>

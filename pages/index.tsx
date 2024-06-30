@@ -1,13 +1,12 @@
 import Meta from '@/components/Meta';
 import ContactIcon from '@/components/ContactIcon';
 import Image from 'next/image';
-import * as API from './api/guide';
+import * as API from '@/lib/api/guide';
 import { GetStaticProps } from 'next';
 import { Post } from '@/lib/type';
 // import PostItemCard from '@/components/PostItemCard';
 import backgroundImage from '@/public/imags/index.jpg';
-// import PostItemHome from '@/components/PostItemHome';
-import GuideCard from '@/components/GuideCard';
+import PostItemHome from '@/components/PostItemHome';
 
 interface IndexProps {
   posts: Post[];
@@ -51,8 +50,8 @@ const Home = ({ posts }: IndexProps) => {
           <div className="mb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100">
             最新攻略
           </div>
-          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 border-none">
-            {posts?.map((item) => <GuideCard post={item} key={item.id} />)}
+          <div className="grid gap-8 sm:grid-cols-1 grid-cols-3 md:grid-cols-2 border-none">
+            {posts?.map((item) => <PostItemHome post={item} key={item.id} />)}
           </div>
         </div>
       </div>

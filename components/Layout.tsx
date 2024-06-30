@@ -5,9 +5,10 @@ import Header from './Header';
 import Footer from './Footer';
 interface LayoutProps {
   children: React.ReactNode;
+  countryList?: any;
 }
 
-const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
+const Layout: FC<LayoutProps> = ({ children, countryList }: LayoutProps) => {
   const menuList = NavBarData;
 
   return (
@@ -16,7 +17,7 @@ const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
         {!!menuList.length && <Header menuList={menuList} />}
         <main className="mb-auto mt-10">{children}</main>
       </div>
-      <Footer menuList={menuList}></Footer>
+      <Footer menuList={menuList} countryList={countryList}></Footer>
     </div>
   );
 };

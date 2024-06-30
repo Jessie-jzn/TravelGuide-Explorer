@@ -2,7 +2,12 @@
 
 const path = require('path');
 
-module.exports = {
+// 打包时是否分析代码
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: false,
+});
+
+module.exports = withBundleAnalyzer({
   env: {
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   },
@@ -62,4 +67,4 @@ module.exports = {
       },
     ],
   },
-};
+});

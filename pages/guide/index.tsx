@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { GetStaticProps } from 'next';
-import * as API from '../api/guide';
+import * as API from '@/lib/api/guide';
 import GuideCard from '@/components/GuideCard';
 import { Post, Country } from '@/lib/type';
 
