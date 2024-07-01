@@ -1,23 +1,12 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { GetStaticProps } from 'next';
-import * as API from '@/lib/api/guide';
 import { MenuItem, Country } from '@/lib/type';
 interface MenuProps {
   menuList: MenuItem[];
   countryList?: Country[];
 }
-// export const getStaticProps: GetStaticProps = async () => {
-//   const data = await API.getCountryList();
 
-//   return {
-//     props: {
-//       countryList: data,
-//     },
-//     revalidate: 10,
-//   };
-// };
 const Footer = ({ menuList, countryList = [] }: MenuProps) => {
   console.log('countryList', countryList);
   return (
@@ -56,12 +45,9 @@ const Footer = ({ menuList, countryList = [] }: MenuProps) => {
             分类
           </h2>
           <ul className="mt-2 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
-            <li>Lifestyle</li>
-            <li>Technology</li>
-            <li>Travel</li>
-            <li>Business</li>
-            <li>Economy</li>
-            <li>Sports</li>
+            {countryList.map((country) => (
+              <li key={country.id}>{country.name}</li>
+            ))}
           </ul>
         </div>
         <div className="flex flex-col sm:mt-8 md:mt-8 lg:mt-8">

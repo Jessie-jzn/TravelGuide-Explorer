@@ -9,27 +9,27 @@ import '../styles/globals.css';
 
 import Layout from '@/components/Layout';
 import { MenuItem } from '@/lib/type';
-// import { GetStaticProps } from 'next';
-// import * as API from '@/lib/api/guide';
+import { useEffect, useState } from 'react';
+
+import * as API from '@/lib/api/guide';
 interface MyAppProps {
   Component: React.ComponentType;
   pageProps: Record<string, unknown>;
   menuList: MenuItem[];
-  countryList?: any;
+  // countryList?: any;
 }
-// export const getStaticProps: GetStaticProps = async () => {
-//   const data = await API.getCountryList();
 
-//   console.log('app中执行', data);
+const MyApp = ({ Component, pageProps }: MyAppProps) => {
+  const [countryList, setCountryList] = useState([]);
 
-//   return {
-//     props: {
-//       countryList: data,
-//     },
-//     revalidate: 10,
-//   };
-// };
-const MyApp = ({ Component, pageProps, countryList }: MyAppProps) => {
+  const fetchCountryList = async () => {
+    const data = await API.getCountryList();
+    setCountryList(data);
+  };
+
+  useEffect(() => {
+    fetchCountryList();
+  }, []);
   return (
     <ThemeProvider defaultTheme="system" enableSystem={true} attribute="class">
       <Layout countryList={countryList}>
@@ -38,5 +38,10 @@ const MyApp = ({ Component, pageProps, countryList }: MyAppProps) => {
     </ThemeProvider>
   );
 };
+// MyApp.getInitialProps = async () => {
+//   const data = await API.getCountryList();
+
+//   return { countryList: data };
+// };
 
 export default MyApp;
