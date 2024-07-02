@@ -7,29 +7,19 @@ import '../build.css';
 import '../styles/main.css';
 import '../styles/globals.css';
 
+import * as API from '@/lib/api/guide';
 import Layout from '@/components/Layout';
 import { MenuItem } from '@/lib/type';
-import { useEffect, useState } from 'react';
 
-import * as API from '@/lib/api/guide';
 interface MyAppProps {
   Component: React.ComponentType;
   pageProps: Record<string, unknown>;
   menuList: MenuItem[];
-  // countryList?: any;
+  countryList?: any;
 }
 
-const MyApp = ({ Component, pageProps }: MyAppProps) => {
-  const [countryList, setCountryList] = useState([]);
-
-  const fetchCountryList = async () => {
-    const data = await API.getCountryList();
-    setCountryList(data);
-  };
-
-  useEffect(() => {
-    fetchCountryList();
-  }, []);
+const MyApp = ({ Component, pageProps, countryList }: MyAppProps) => {
+  console.log('countryList', countryList);
   return (
     <ThemeProvider defaultTheme="system" enableSystem={true} attribute="class">
       <Layout countryList={countryList}>
@@ -38,10 +28,11 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
     </ThemeProvider>
   );
 };
-// MyApp.getInitialProps = async () => {
-//   const data = await API.getCountryList();
+MyApp.getInitialProps = async () => {
+  const data = await API.getCountryList();
+  // const appProps = await App.getInitialProps(appContext);
 
-//   return { countryList: data };
-// };
+  return { countryList: data };
+};
 
 export default MyApp;

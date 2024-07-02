@@ -11,6 +11,7 @@ const siteMeta = {
   github: 'https://github.com/Jessie-jzn',
   locale: 'zh-CN',
   siteUrl: 'www.jessieontheroad.com/',
+  domain: 'jessieontheroad.com',
   twitter: '',
 };
 export default siteMeta;
