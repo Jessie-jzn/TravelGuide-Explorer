@@ -3,23 +3,22 @@ import Head from 'next/head';
 import ContactIcon from '@/components/ContactIcon';
 import { GetStaticProps } from 'next';
 import * as API from '@/lib/api/guide';
-import NotionService from '@/lib/notion/NotionServer';
-import { NotionRenderer } from 'react-notion-x';
-// import { idToUuid } from 'notion-utils';
-import Link from 'next/link';
-const notionService = new NotionService();
+
 export const getStaticProps: GetStaticProps = async () => {
+  const [guideList = [], countryList] = await API.getTravelGuideList();
+
   // 提取包含指南的国家列表
-  const post = await notionService.getPage('33b937c4380c4c268616b76a2b2dc348');
+  const guidesByCountry = getGuidesByCountry(guideList, countryList);
 
   return {
     props: {
-      post,
+      guidesByCountry: guidesByCountry,
+      posts: guideList,
     },
     revalidate: 10,
   };
 };
-const About = ({ post }: any) => {
+const About = () => {
   return (
     <>
       <Head>
@@ -37,17 +36,8 @@ const About = ({ post }: any) => {
           }}
         />
       </Head>
-      <NotionRenderer
-        recordMap={post}
-        fullPage={true}
-        darkMode={false}
-        components={{
-          nextImage: Image,
-          nextLink: Link,
-        }}
-      />
 
-      {/* <div className="flex-auto mx-auto w-full px-4 sm:px-8 lg:px-8  max-w-3xl xl:max-w-7xl">
+      <div className="flex-auto mx-auto w-full px-4 sm:px-8 lg:px-8  max-w-3xl xl:max-w-7xl">
         <div className="items-start space-y-2 grid grid-cols-2 sm:grid-cols-1 gap-x-8">
           <div className="flex flex-col items-center space-x-1 pt-8 sm:pt-28">
             <Image
@@ -111,7 +101,7 @@ const About = ({ post }: any) => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
