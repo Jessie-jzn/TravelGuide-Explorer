@@ -1,16 +1,19 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import Head from 'next/head';
-import ContactIcon from '@/components/ContactIcon';
+// import ContactIcon from '@/components/ContactIcon';
 import { GetStaticProps } from 'next';
-import * as API from '@/lib/api/guide';
+// import * as API from '@/lib/api/guide';
 import NotionService from '@/lib/notion/NotionServer';
-import { NotionRenderer } from 'react-notion-x';
+// import { NotionRenderer } from 'react-notion-x';
 // import { idToUuid } from 'notion-utils';
-import Link from 'next/link';
+// import Link from 'next/link';
+import { NOTION_ABOUT_ID } from '@/lib/constants';
+import NotionPage from '@/components/NotionPage';
 const notionService = new NotionService();
 export const getStaticProps: GetStaticProps = async () => {
   // 提取包含指南的国家列表
-  const post = await notionService.getPage('33b937c4380c4c268616b76a2b2dc348');
+  const post = await notionService.getPage(NOTION_ABOUT_ID);
+  console.log('post', post);
 
   return {
     props: {
@@ -37,7 +40,9 @@ const About = ({ post }: any) => {
           }}
         />
       </Head>
-      <NotionRenderer
+
+      <NotionPage recordMap={post} />
+      {/* <NotionRenderer
         recordMap={post}
         fullPage={true}
         darkMode={false}
@@ -45,7 +50,7 @@ const About = ({ post }: any) => {
           nextImage: Image,
           nextLink: Link,
         }}
-      />
+      /> */}
 
       {/* <div className="flex-auto mx-auto w-full px-4 sm:px-8 lg:px-8  max-w-3xl xl:max-w-7xl">
         <div className="items-start space-y-2 grid grid-cols-2 sm:grid-cols-1 gap-x-8">

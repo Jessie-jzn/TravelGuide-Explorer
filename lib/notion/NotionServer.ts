@@ -14,7 +14,7 @@ class NotionService {
   constructor() {
     this.client = new Client({ auth: NOTION_TOKEN });
     this.notionAPI = new NotionAPI({
-      apiBaseUrl: process.env.NOTION_API_BASE_URL,
+      // apiBaseUrl: process.env.NOTION_API_BASE_URL,
     });
   }
   /**
