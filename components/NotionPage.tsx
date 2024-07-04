@@ -2,9 +2,13 @@ import React, { useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import SiteConfig from '../site.config';
+import PageSocial from './PageSocial';
+
 // import { PageBlock } from 'notion-types'
 import { NotionRenderer } from 'react-notion-x';
 import * as types from '@/lib/type';
+import styles from './styles.module.css';
 // const Code = dynamic(() =>
 //   import('react-notion-x/build/third-party/code').then(async (m) => {
 //     // add / remove any prism syntaxes here
@@ -101,29 +105,28 @@ const NotionPage: React.FC<types.PageProps> = ({
     }),
     [],
   );
+  const pageAside = React.useMemo(() => <PageSocial />, []);
+  console.log('recordMap', recordMap);
   return (
     <>
       <NotionRenderer
-        // bodyClassName={cs(
-        //   styles.notion,
-        //   pageId === site.rootNotionPageId && 'index-page',
-        // )}
+        bodyClassName={styles.notion}
         components={components}
         recordMap={recordMap}
         // rootPageId={site.rootNotionPageId}
         // rootDomain={site.domain}
-        // fullPage={!isLiteMode}
+        fullPage={true}
         previewImages={!!recordMap.preview_images}
         showCollectionViewDropdown={false}
         showTableOfContents={showTableOfContents}
         minTableOfContentsItems={minTableOfContentsItems}
-        // defaultPageIcon={config.defaultPageIcon}
-        // defaultPageCover={config.defaultPageCover}
-        // defaultPageCoverPosition={config.defaultPageCoverPosition}
+        defaultPageIcon={SiteConfig.defaultPageIcon}
+        defaultPageCover={SiteConfig.defaultPageCover}
+        defaultPageCoverPosition={SiteConfig.defaultPageCoverPosition}
         // mapPageUrl={siteMapPageUrl}
         // mapImageUrl={mapImageUrl}
         // searchNotion={config.isSearchEnabled ? searchNotion : null}
-        // pageAside={pageAside}
+        pageAside={pageAside}
         // footer={footer}
       />
     </>

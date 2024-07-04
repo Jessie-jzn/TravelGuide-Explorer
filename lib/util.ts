@@ -84,6 +84,7 @@ export const formatDatabase = (pages: any) => {
         const property = properties[key];
 
         let value;
+        console.log('property', property);
 
         switch (property.type) {
           case 'title':

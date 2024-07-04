@@ -27,6 +27,8 @@ export const getStaticProps: GetStaticProps = async () => {
   // 提取包含指南的国家列表
   const guidesByCountry = getGuidesByCountry(guideList, countryList);
 
+  console.log('guidesByCountry', guidesByCountry);
+
   return {
     props: {
       guidesByCountry: guidesByCountry,
@@ -85,7 +87,7 @@ const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
                 {item.icon}
                 {item.name}
               </h3>
-              <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 border-none">
+              <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-none">
                 {item.guides.map((post: Post) => (
                   <GuideCard post={post} key={post.id} />
                 ))}

@@ -6,6 +6,7 @@ import 'tailwindcss/tailwind.css';
 import '../build.css';
 import '../styles/main.css';
 import '../styles/globals.css';
+import '../styles/notion.css';
 
 // import * as API from '@/lib/api/guide';
 import Layout from '@/components/Layout';

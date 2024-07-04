@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Head from 'next/head';
-import { SiteMetaData } from '../public/utils/config';
+import SiteConfig from '../site.config';
 interface MetaProps {
   title?: string;
 }
@@ -8,7 +8,7 @@ const Meta: FC<MetaProps> = ({ title }) => {
   return (
     <Head>
       <title>
-        {title} | {SiteMetaData.title}
+        {title} | {SiteConfig.title}
       </title>
       <link
         rel="apple-touch-icon"

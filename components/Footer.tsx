@@ -3,12 +3,11 @@ import React from 'react';
 import Link from 'next/link';
 import { MenuItem, Country } from '@/lib/type';
 interface MenuProps {
-  menuList: MenuItem[];
+  navigationLinks: MenuItem[];
   countryList?: Country[];
 }
 
-const Footer = ({ menuList, countryList = [] }: MenuProps) => {
-  console.log('countryList', countryList);
+const Footer = ({ navigationLinks, countryList = [] }: MenuProps) => {
   return (
     <div className="box-border flex flex-col items-center p-16 xl:px-80 lg:px-40 md:px-10 w-fullbg-[#F6F6F7] border-t border-[#E8E8EA] dark:border-zinc-900 dark:bg-zinc-800">
       <div className="flex flex-wrap justify-between w-full pb-8">
@@ -31,7 +30,7 @@ const Footer = ({ menuList, countryList = [] }: MenuProps) => {
             导航
           </h2>
           <ul className="mt-2 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
-            {menuList?.map((item: MenuItem) => (
+            {navigationLinks?.map((item: MenuItem) => (
               <Link href={item.uri} key={item.id}>
                 <li className="relative block py-2 transition hover:text-teal-500 dark:hover:text-teal-400">
                   {item.title}

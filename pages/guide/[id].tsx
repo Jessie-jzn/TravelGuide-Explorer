@@ -1,12 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import NotionService from '@/lib/notion/NotionServer';
 import { Post } from '@/lib/type';
-import { NotionRenderer } from 'react-notion-x';
-// import { idToUuid } from 'notion-utils';
-import Link from 'next/link';
-import Image from 'next/image';
 import * as API from '@/lib/api/guide';
 import React from 'react';
+import NotionPage from '@/components/NotionPage';
 
 const notionService = new NotionService();
 
@@ -38,7 +35,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const RenderPost = ({ post }: any): React.JSX.Element => {
   return (
     <div className="flex-auto mx-auto w-full">
-      <NotionRenderer
+      <NotionPage recordMap={post} />
+      {/* <NotionRenderer
         recordMap={post}
         fullPage={true}
         darkMode={false}
@@ -46,7 +44,7 @@ const RenderPost = ({ post }: any): React.JSX.Element => {
           nextImage: Image,
           nextLink: Link,
         }}
-      />
+      /> */}
     </div>
   );
 };

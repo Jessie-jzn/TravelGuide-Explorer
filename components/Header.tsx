@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 
 interface MenuProps {
-  menuList: MenuItem[];
+  navigationLinks: MenuItem[];
 }
 const isActivePath = (path: string, uri: string): boolean => {
   if (uri === '/') {
@@ -16,7 +16,7 @@ const isActivePath = (path: string, uri: string): boolean => {
     return path.startsWith(uri);
   }
 };
-const Header = ({ menuList }: MenuProps) => {
+const Header = ({ navigationLinks }: MenuProps) => {
   const { pathname } = useRouter();
   const router = useRouter();
   const [visible, setVisible] = useState(false);
@@ -45,7 +45,7 @@ const Header = ({ menuList }: MenuProps) => {
       <div className="flex max-w-2xl lg:max-w-5xl">
         <div className="pointer-events-auto sm:hidden block px-10">
           <div className="flex rounded-full bg-white px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-            {menuList.map((item) => {
+            {navigationLinks.map((item) => {
               const isActive = isActivePath(pathname, item.uri);
               return (
                 <Link href={item.uri} key={item.id}>
@@ -112,7 +112,7 @@ const Header = ({ menuList }: MenuProps) => {
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                {menuList.map((item) => {
+                {navigationLinks.map((item) => {
                   return (
                     <li
                       key={item.id}
