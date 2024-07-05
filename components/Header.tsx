@@ -9,11 +9,11 @@ import { Analytics } from '@vercel/analytics/react';
 interface MenuProps {
   navigationLinks: MenuItem[];
 }
-const isActivePath = (path: string, uri: string): boolean => {
-  if (uri === '/') {
+const isActivePath = (path: string, url: string): boolean => {
+  if (url === '/') {
     return path === '/';
   } else {
-    return path.startsWith(uri);
+    return path.startsWith(url);
   }
 };
 const Header = ({ navigationLinks }: MenuProps) => {
@@ -21,9 +21,9 @@ const Header = ({ navigationLinks }: MenuProps) => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
 
-  const handleClickMenuItem = (uri: string) => {
+  const handleClickMenuItem = (url: string) => {
     setVisible(false);
-    router.push(uri);
+    router.push(url);
   };
 
   return (
@@ -46,9 +46,9 @@ const Header = ({ navigationLinks }: MenuProps) => {
         <div className="pointer-events-auto sm:hidden block px-10">
           <div className="flex rounded-full bg-white px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
             {navigationLinks.map((item) => {
-              const isActive = isActivePath(pathname, item.uri);
+              const isActive = isActivePath(pathname, item.url);
               return (
-                <Link href={item.uri} key={item.id}>
+                <Link href={item.url} key={item.id}>
                   <div
                     className={`relative px-3 py-2 transition ${isActive ? 'text-teal-500 dark:text-teal-400' : 'hover:text-teal-500 dark:hover:text-teal-400'}`}
                   >
@@ -116,7 +116,7 @@ const Header = ({ navigationLinks }: MenuProps) => {
                   return (
                     <li
                       key={item.id}
-                      onClick={() => handleClickMenuItem(item.uri)}
+                      onClick={() => handleClickMenuItem(item.url)}
                     >
                       <div className="block py-2">{item.title}</div>
                     </li>

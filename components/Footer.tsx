@@ -31,7 +31,7 @@ const Footer = ({ navigationLinks, countryList = [] }: MenuProps) => {
           </h2>
           <ul className="mt-2 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
             {navigationLinks?.map((item: MenuItem) => (
-              <Link href={item.uri} key={item.id}>
+              <Link href={item.url} key={item.id}>
                 <li className="relative block py-2 transition hover:text-teal-500 dark:hover:text-teal-400">
                   {item.title}
                 </li>

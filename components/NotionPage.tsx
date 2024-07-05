@@ -4,11 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SiteConfig from '../site.config';
 import PageSocial from './PageSocial';
+// import PropertyValue from './PropertyValue';
 
 // import { PageBlock } from 'notion-types'
 import { NotionRenderer } from 'react-notion-x';
-import * as types from '@/lib/type';
+import * as Types from '@/lib/type';
 import styles from './styles.module.css';
+import PropertyValue from './PropertyValue';
+import NotionPageHeader from './NotionPageHeader';
 // const Code = dynamic(() =>
 //   import('react-notion-x/build/third-party/code').then(async (m) => {
 //     // add / remove any prism syntaxes here
@@ -75,7 +78,49 @@ const Equation = dynamic(() =>
 // );
 const minTableOfContentsItems = 3;
 
-const NotionPage: React.FC<types.PageProps> = ({
+const propertyLastEditedTimeValue = (
+  { block, pageHeader }: { pageHeader: boolean; block: Types.Block },
+  defaultFn: () => React.ReactNode,
+) =>
+  PropertyValue(
+    {
+      type: 'lastEdited',
+      block,
+      pageHeader,
+    },
+    defaultFn,
+  );
+const propertyDateValue = (
+  {
+    pageHeader,
+    schema,
+    block,
+  }: { pageHeader: boolean; schema: any; block: Types.Block },
+  defaultFn: () => React.ReactNode,
+) =>
+  PropertyValue(
+    {
+      type: 'published',
+      block,
+      schema,
+      pageHeader,
+    },
+    defaultFn,
+  );
+
+const propertyCreatedTimeValue = (
+  { pageHeader, block }: { pageHeader: boolean; block: Types.Block },
+  defaultFn: () => React.ReactNode,
+) =>
+  PropertyValue(
+    {
+      type: 'created',
+      block,
+      pageHeader,
+    },
+    defaultFn,
+  );
+const NotionPage: React.FC<Types.PageProps> = ({
   //   site,
   recordMap,
   //   error,
@@ -83,6 +128,8 @@ const NotionPage: React.FC<types.PageProps> = ({
 }) => {
   const keys = Object.keys(recordMap?.block || {});
   const block = recordMap?.block?.[keys[0]]?.value;
+
+  console.log('block', block);
   const isBlogPost =
     block?.type === 'page' && block?.parent_table === 'collection';
 
@@ -98,10 +145,11 @@ const NotionPage: React.FC<types.PageProps> = ({
       //   Pdf,
       //   Modal,
       //   Tweet,
-      //   Header: NotionPageHeader,
-      //   propertyLastEditedTimeValue,
-      //   propertyTextValue,
-      //   propertyDateValue,
+      Header: NotionPageHeader,
+
+      propertyLastEditedTimeValue,
+      propertyDateValue,
+      propertyCreatedTimeValue,
     }),
     [],
   );
@@ -114,7 +162,7 @@ const NotionPage: React.FC<types.PageProps> = ({
         components={components}
         recordMap={recordMap}
         // rootPageId={site.rootNotionPageId}
-        // rootDomain={site.domain}
+        rootDomain={SiteConfig.domain}
         fullPage={true}
         previewImages={!!recordMap?.preview_images}
         showCollectionViewDropdown={false}

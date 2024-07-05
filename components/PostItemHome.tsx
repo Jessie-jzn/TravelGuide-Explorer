@@ -36,7 +36,7 @@ const PostItemHome = ({ post }: PostItemHomeProp) => {
                 {post?.name}
               </div>
               <div className="mt-2 text-gray-500">
-                <p className="text-sm"> {post.date}</p>
+                <p className="text-sm"> {post.created_time}</p>
               </div>
             </div>
           </div>

@@ -25,17 +25,20 @@ const SiteConfig = {
     {
       id: 1,
       title: '🏠首页',
-      uri: '/',
+      url: '/',
+      pageId: '',
     },
     {
       id: 2,
       title: '🌊攻略',
-      uri: '/guide',
+      url: '/guide',
+      pageId: '',
     },
     {
       id: 3,
       title: '☎️联系',
-      uri: '/about',
+      url: '/about',
+      pageId: '',
     },
   ],
 

@@ -4,7 +4,7 @@ import { LANG } from './constants';
  * @timestampString 2024-02-22T15:22:31
  * @returns 格式化后的日期字符串，例如：2024年02月22日
  */
-export const formatTimestampToDate = (timestampString: string): string => {
+export const formatTimestampToDate = (timestampString: number): string => {
   if (!timestampString) return '';
   const timestamp = new Date(timestampString);
   const year = timestamp.getFullYear();
@@ -77,14 +77,14 @@ export const formatDatabase = (pages: any) => {
   return pages.map((page: any) => {
     // 提取 properties 的值
     const properties = page.properties;
-
+    debugger;
+    console.log('properties', properties);
     // 遍历 properties 并提取每个属性的值
     const extractedProperties = Object.keys(properties).reduce(
       (acc, key) => {
         const property = properties[key];
 
         let value;
-        console.log('property', property);
 
         switch (property.type) {
           case 'title':
@@ -105,11 +105,21 @@ export const formatDatabase = (pages: any) => {
           case 'checkbox':
             value = property.checkbox;
             break;
+          case 'created_time':
+            value = formatDate(
+              new Date(property.created_time).toString(),
+              LANG,
+            );
+            break;
           default:
-            value = undefined;
+            value = null;
         }
+        // 处理key，只对包含空格的key用下划线连接
+        const formattedKey = key.includes(' ')
+          ? key.replace(/\s+/g, '_').toLowerCase()
+          : key.toLowerCase();
 
-        acc[key.toLowerCase()] = value;
+        acc[formattedKey] = value;
         return acc;
       },
       {} as { [key: string]: any },

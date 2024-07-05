@@ -3,7 +3,7 @@ export interface MenuItem {
   id: number;
   slug?: string;
   title: string;
-  uri: string;
+  url: string;
 }
 export interface PageError {
   message?: string;
@@ -19,6 +19,7 @@ export interface Post {
   image: string;
   tags?: any;
   cover: string;
+  created_time?: string;
   country: string[];
 }
 export interface Site {
@@ -54,4 +55,53 @@ export interface PageProps {
   recordMap: ExtendedRecordMap;
   pageId?: string;
   error?: PageError;
+}
+
+export interface PropertyLastEditedTimeValueProps {
+  block: Block;
+  pageHeader: boolean;
+  defaultFn: () => React.ReactNode;
+}
+export interface PropertyDateValueProps {
+  data: DataItem[];
+  schema: Schema;
+  pageHeader: boolean;
+  defaultFn: () => React.ReactNode;
+}
+// types.ts
+export interface Block {
+  id: string;
+  version: number;
+  type: string;
+  properties: {
+    [key: string]: Array<Array<string>>;
+  };
+  content: string[];
+  format: {
+    page_font: string;
+    page_icon: string;
+    page_cover: string;
+    page_full_width: boolean;
+    page_small_text: boolean;
+    page_cover_position: number;
+    social_media_image_preview_url: string;
+  };
+  created_time: number;
+  last_edited_time: number;
+  parent_id: string;
+  parent_table: string;
+  alive: boolean;
+  file_ids: string[];
+  created_by_table: string;
+  created_by_id: string;
+  last_edited_by_table: string;
+  last_edited_by_id: string;
+  space_id: string;
+}
+export interface Schema {
+  name?: string;
+}
+
+export interface DataItem {
+  [key: string]: any;
 }
