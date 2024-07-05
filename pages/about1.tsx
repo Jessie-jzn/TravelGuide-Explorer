@@ -1,23 +1,7 @@
 import Image from 'next/image';
 import Head from 'next/head';
 import ContactIcon from '@/components/ContactIcon';
-import { GetStaticProps } from 'next';
-import * as API from '@/lib/api/guide';
 
-export const getStaticProps: GetStaticProps = async () => {
-  const [guideList = [], countryList] = await API.getTravelGuideList();
-
-  // 提取包含指南的国家列表
-  const guidesByCountry = getGuidesByCountry(guideList, countryList);
-
-  return {
-    props: {
-      guidesByCountry: guidesByCountry,
-      posts: guideList,
-    },
-    revalidate: 10,
-  };
-};
 const About = () => {
   return (
     <>
