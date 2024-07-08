@@ -7,11 +7,15 @@ import PageSocial from './PageSocial';
 // import PropertyValue from './PropertyValue';
 
 // import { PageBlock } from 'notion-types'
+import { getBlockTitle, getPageProperty } from 'notion-utils';
 import { NotionRenderer } from 'react-notion-x';
+import { Block } from 'notion-types';
 import * as Types from '@/lib/type';
 import styles from './styles.module.css';
 import PropertyValue from './PropertyValue';
 import NotionPageHeader from './NotionPageHeader';
+import { BlogSEO } from '@/components/SEO';
+import { mapImageUrl } from '@/lib/util';
 // const Code = dynamic(() =>
 //   import('react-notion-x/build/third-party/code').then(async (m) => {
 //     // add / remove any prism syntaxes here
@@ -79,7 +83,7 @@ const Equation = dynamic(() =>
 const minTableOfContentsItems = 3;
 
 const propertyLastEditedTimeValue = (
-  { block, pageHeader }: { pageHeader: boolean; block: Types.Block },
+  { block, pageHeader }: { pageHeader: boolean; block: Block },
   defaultFn: () => React.ReactNode,
 ) =>
   PropertyValue(
@@ -95,7 +99,7 @@ const propertyDateValue = (
     pageHeader,
     schema,
     block,
-  }: { pageHeader: boolean; schema: any; block: Types.Block },
+  }: { pageHeader: boolean; schema: any; block: Block },
   defaultFn: () => React.ReactNode,
 ) =>
   PropertyValue(
@@ -109,7 +113,7 @@ const propertyDateValue = (
   );
 
 const propertyCreatedTimeValue = (
-  { pageHeader, block }: { pageHeader: boolean; block: Types.Block },
+  { pageHeader, block }: { pageHeader: boolean; block: Block },
   defaultFn: () => React.ReactNode,
 ) =>
   PropertyValue(
@@ -134,6 +138,18 @@ const NotionPage: React.FC<Types.PageProps> = ({
 
   const showTableOfContents = !!isBlogPost;
 
+  const title = getBlockTitle(block, recordMap) || SiteConfig.title;
+  const socialDescription =
+    getPageProperty<string>('Description', block, recordMap) ||
+    SiteConfig.description;
+
+  const socialImage = mapImageUrl(
+    getPageProperty<string>('Social Image', block, recordMap) ||
+      (block as Block).format?.page_cover ||
+      SiteConfig.defaultPageCover,
+    block,
+  );
+
   const components = useMemo(
     () => ({
       nextImage: Image,
@@ -156,6 +172,13 @@ const NotionPage: React.FC<Types.PageProps> = ({
 
   return (
     <>
+      <BlogSEO
+        title={title}
+        description={socialDescription}
+        // date
+        // lastEdit
+        image={socialImage}
+      />
       <NotionRenderer
         bodyClassName={styles.notion}
         components={components}

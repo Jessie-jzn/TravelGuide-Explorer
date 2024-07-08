@@ -1,4 +1,7 @@
 import { LANG } from './constants';
+import SiteConfig from '../site.config';
+import { defaultMapImageUrl } from 'react-notion-x';
+import { Block } from 'notion-types';
 /**
  * 格式化日期
  * @timestampString 2024-02-22T15:22:31
@@ -161,4 +164,33 @@ export const formatPostBlock = (blockMap: any, pageId: string) => {
     },
     blockMap,
   };
+};
+
+export const getEnv = (
+  key: string,
+  defaultValue?: string,
+  env = process.env,
+): string => {
+  const value = env[key];
+
+  if (value !== undefined) {
+    return value;
+  }
+
+  if (defaultValue !== undefined) {
+    return defaultValue;
+  }
+
+  throw new Error(`Config error: missing required env variable "${key}"`);
+};
+
+export const mapImageUrl = (url: string, block: Block) => {
+  if (
+    url === SiteConfig.defaultPageCover ||
+    url === SiteConfig.defaultPageIcon
+  ) {
+    return url;
+  }
+
+  return defaultMapImageUrl(url, block);
 };

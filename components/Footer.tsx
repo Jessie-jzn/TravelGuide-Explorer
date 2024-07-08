@@ -1,13 +1,12 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { MenuItem, Country } from '@/lib/type';
+import { MenuItem } from '@/lib/type';
 interface MenuProps {
   navigationLinks: MenuItem[];
-  countryList?: Country[];
 }
 
-const Footer = ({ navigationLinks, countryList = [] }: MenuProps) => {
+const Footer = ({ navigationLinks }: MenuProps) => {
   return (
     <div className="box-border flex flex-col items-center p-16 xl:px-80 lg:px-40 md:px-10 w-fullbg-[#F6F6F7] border-t border-[#E8E8EA] dark:border-zinc-900 dark:bg-zinc-800">
       <div className="flex flex-wrap justify-between w-full pb-8">

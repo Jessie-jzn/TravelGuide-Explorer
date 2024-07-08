@@ -7,7 +7,6 @@ const NOTION_ABOUT_ID = process.env.NOTION_ABOUT_ID as string;
 const NOTION_COUNTRY_ID = process.env.NOTION_COUNTRY_ID as string;
 const PREVIEW_IMAGES_ENABLED = true;
 const LANG = process.env.NEXT_PUBLIC_LANG || 'zh-CN'; // zh-CN,'n-U
-
 export {
   NOTION_TOKEN,
   NOTION_HOST,

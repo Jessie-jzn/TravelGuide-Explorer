@@ -1,4 +1,5 @@
-import { ExtendedRecordMap } from 'notion-types';
+import { ExtendedRecordMap, Block } from 'notion-types';
+
 export interface MenuItem {
   id: number;
   slug?: string;
@@ -67,36 +68,6 @@ export interface PropertyDateValueProps {
   schema: Schema;
   pageHeader: boolean;
   defaultFn: () => React.ReactNode;
-}
-// types.ts
-export interface Block {
-  id: string;
-  version: number;
-  type: string;
-  properties: {
-    [key: string]: Array<Array<string>>;
-  };
-  content: string[];
-  format: {
-    page_font: string;
-    page_icon: string;
-    page_cover: string;
-    page_full_width: boolean;
-    page_small_text: boolean;
-    page_cover_position: number;
-    social_media_image_preview_url: string;
-  };
-  created_time: number;
-  last_edited_time: number;
-  parent_id: string;
-  parent_table: string;
-  alive: boolean;
-  file_ids: string[];
-  created_by_table: string;
-  created_by_id: string;
-  last_edited_by_table: string;
-  last_edited_by_id: string;
-  space_id: string;
 }
 export interface Schema {
   name?: string;

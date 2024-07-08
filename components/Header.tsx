@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { MenuItem } from '../lib/type';
 import { useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
-
+import { SpeedInsights } from '@vercel/speed-insights/next';
 interface MenuProps {
   navigationLinks: MenuItem[];
 }
@@ -132,6 +132,7 @@ const Header = ({ navigationLinks }: MenuProps) => {
         </div>
         <div className="flex space-x-4">
           <Analytics />
+          <SpeedInsights />
         </div>
       </div>
     </div>
