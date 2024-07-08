@@ -82,7 +82,6 @@ const socialLinks: SocialLink[] = [
 ].filter(Boolean) as SocialLink[];
 
 const PageSocial = () => {
-  console.log('socialLinks', socialLinks);
   return (
     <div className="flex flex-col items-center text-center text-gray-700 dark:text-gray-300">
       {socialLinks.map((action) => (

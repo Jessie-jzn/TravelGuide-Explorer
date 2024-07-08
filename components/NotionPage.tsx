@@ -129,7 +129,6 @@ const NotionPage: React.FC<Types.PageProps> = ({
   const keys = Object.keys(recordMap?.block || {});
   const block = recordMap?.block?.[keys[0]]?.value;
 
-  console.log('block', block);
   const isBlogPost =
     block?.type === 'page' && block?.parent_table === 'collection';
 
@@ -154,7 +153,7 @@ const NotionPage: React.FC<Types.PageProps> = ({
     [],
   );
   const pageAside = React.useMemo(() => <PageSocial />, []);
-  console.log('recordMap', recordMap);
+
   return (
     <>
       <NotionRenderer

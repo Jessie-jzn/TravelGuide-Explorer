@@ -27,8 +27,6 @@ export const getStaticProps: GetStaticProps = async () => {
   // 提取包含指南的国家列表
   const guidesByCountry = getGuidesByCountry(guideList, countryList);
 
-  console.log('guidesByCountry', guidesByCountry);
-
   return {
     props: {
       guidesByCountry: guidesByCountry,

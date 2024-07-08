@@ -7,7 +7,6 @@ const notionService = new NotionService();
 
 export const getTravelGuideList = async () => {
   const res = await notionService.getDatabase(NOTION_GUIDE_ID);
-  console.log('res', formatDatabase(res));
   return formatDatabase(res);
 };
 

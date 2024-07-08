@@ -77,8 +77,7 @@ export const formatDatabase = (pages: any) => {
   return pages.map((page: any) => {
     // 提取 properties 的值
     const properties = page.properties;
-    debugger;
-    console.log('properties', properties);
+
     // 遍历 properties 并提取每个属性的值
     const extractedProperties = Object.keys(properties).reduce(
       (acc, key) => {

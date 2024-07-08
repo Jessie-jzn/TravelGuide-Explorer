@@ -13,7 +13,6 @@ const notionService = new NotionService();
 export const getStaticProps: GetStaticProps = async () => {
   // 提取包含指南的国家列表
   const post = await notionService.getPage(NOTION_ABOUT_ID);
-  console.log('post', post);
 
   return {
     props: {
