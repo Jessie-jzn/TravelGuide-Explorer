@@ -7,7 +7,7 @@ import PageSocial from './PageSocial';
 // import PropertyValue from './PropertyValue';
 
 // import { PageBlock } from 'notion-types'
-import { getBlockTitle, getPageProperty } from 'notion-utils';
+// import { getBlockTitle } from 'notion-utils';
 import { NotionRenderer } from 'react-notion-x';
 import { Block } from 'notion-types';
 import * as Types from '@/lib/type';
@@ -138,17 +138,25 @@ const NotionPage: React.FC<Types.PageProps> = ({
 
   const showTableOfContents = !!isBlogPost;
 
-  const title = getBlockTitle(block, recordMap) || SiteConfig.title;
-  const socialDescription =
-    getPageProperty<string>('Description', block, recordMap) ||
-    SiteConfig.description;
+  const title = SiteConfig.title;
+  // const socialDescription =
+  //   getPageProperty<string>('Description', block, recordMap) ||
+  //   SiteConfig.description;
+  const socialDescription = SiteConfig.description;
 
+  // const socialImage = mapImageUrl(
+  //   getPageProperty<string>('Social Image', block, recordMap) ||
+  //     (block as Block).format?.page_cover ||
+  //     SiteConfig.defaultPageCover,
+  //   block,
+  // );
   const socialImage = mapImageUrl(
-    getPageProperty<string>('Social Image', block, recordMap) ||
-      (block as Block).format?.page_cover ||
-      SiteConfig.defaultPageCover,
+    (block as Block)?.format?.page_cover || SiteConfig.defaultPageCover,
     block,
   );
+
+  // console.log('socialImage', socialImage);
+  // debugger;
 
   const components = useMemo(
     () => ({

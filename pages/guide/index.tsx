@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { GetStaticProps } from 'next';
 import * as API from '@/lib/api/guide';
 import GuideCard from '@/components/GuideCard';
@@ -37,7 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
-  const [searchValue, setSearchValue] = useState('');
+  // const [searchValue, setSearchValue] = useState('');
 
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700  px-4 sm:px-8 lg:px-8">
@@ -49,7 +48,7 @@ const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
           I primarily cover web development and tech topics, occasionally
           sharing insights into my personal life.
         </p>
-        <div className="relative max-w-lg">
+        {/* <div className="relative max-w-lg">
           <label>
             <span className="sr-only">搜索相关攻略</span>
             <input
@@ -74,7 +73,7 @@ const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
           </svg>
-        </div>
+        </div> */}
       </div>
 
       {guidesByCountry.map(

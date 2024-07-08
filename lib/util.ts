@@ -79,7 +79,7 @@ export const deepClone = <T>(obj: T): T => {
 export const formatDatabase = (pages: any) => {
   return pages.map((page: any) => {
     // 提取 properties 的值
-    const properties = page.properties;
+    const properties = page?.properties;
 
     // 遍历 properties 并提取每个属性的值
     const extractedProperties = Object.keys(properties).reduce(
