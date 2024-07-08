@@ -13,6 +13,8 @@ const SiteConfig = {
   description:
     'Learn more about Jessie, a passionate travel blogger who has explored many countries and shares travel tips and stories.',
   language: 'zh-CN',
+  siteLogo: '/static/images/avatar.jpg',
+  socialBanner: '/static/images/projects/karhdo-blog.png',
   theme: 'system',
   email: 'znjessie858@gmail.com',
   locale: 'zh-CN',

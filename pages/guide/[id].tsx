@@ -4,8 +4,6 @@ import { Post } from '@/lib/type';
 import * as API from '@/lib/api/guide';
 import React from 'react';
 import NotionPage from '@/components/NotionPage';
-import { BlogSEO } from '@/components/SEO';
-import { title } from 'process';
 
 const notionService = new NotionService();
 
@@ -37,7 +35,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const RenderPost = ({ post }: any): React.JSX.Element => {
   return (
     <div className="flex-auto mx-auto w-full">
-      <BlogSEO title={title} date lastEdit url image />
       <NotionPage recordMap={post} />
     </div>
   );
