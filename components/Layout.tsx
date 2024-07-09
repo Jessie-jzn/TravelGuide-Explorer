@@ -17,6 +17,12 @@ const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
         <main className="mb-auto mt-10">{children}</main>
       </div>
       <Footer navigationLinks={SiteConfig.navigationLinks}></Footer>
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9533100025276131"
+        crossOrigin="anonymous"
+        // crossorigin="anonymous"
+      ></script>
     </div>
   );
 };
