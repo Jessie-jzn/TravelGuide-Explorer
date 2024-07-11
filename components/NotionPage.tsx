@@ -144,28 +144,14 @@ const NotionPage: React.FC<Types.PageProps> = ({
   const socialDescription =
     getPageProperty<string>('Description', block, recordMap) ||
     SiteConfig.description;
-  // const socialDescription = SiteConfig.description;
-
-  // const socialImage = mapImageUrl(
-  //   getPageProperty<string>('Social Image', block, recordMap) ||
-  //     (block as Block).format?.page_cover ||
-  //     SiteConfig.defaultPageCover,
-  //   block,
-  // );
-  // const imgs = mapImageUrl(
-  //   getPageProperty<string>('Social Image', block, recordMap),
-  //   block,
-  // );
-  // console.log('imgs', imgs);
-  // debugger;
-
   const socialImage = mapImageUrl(
     (block as Block)?.format?.page_cover || SiteConfig.defaultPageCover,
     block,
   );
-
-  // console.log('socialImage', socialImage);
-  // debugger;
+  const lastEditTime =
+    getPageProperty<string>('last_edited_time', block, recordMap) || new Date();
+  const createdTime =
+    getPageProperty<string>('created_time', block, recordMap) || new Date();
 
   const components = useMemo(
     () => ({
@@ -191,8 +177,8 @@ const NotionPage: React.FC<Types.PageProps> = ({
       <BlogSEO
         title={title}
         description={socialDescription}
-        // date
-        // lastEdit
+        createdTime={createdTime}
+        lastEditTime={lastEditTime}
         image={socialImage}
       />
       <NotionRenderer

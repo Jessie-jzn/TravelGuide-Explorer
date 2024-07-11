@@ -113,21 +113,22 @@ export const CommonSEO = ({
 
 interface BlogSeoProps extends CommonSEOProps {
   // url: string;
-  // date: number | Date;
-  // lastEdit: number | Date;
+  createdTime: string | Date;
+  lastEditTime: string | Date;
 }
 
 export const BlogSEO = ({
   title,
-  // date,
-  // lastEdit,
+  createdTime,
+  lastEditTime,
+
   // url,
   image,
 }: BlogSeoProps) => {
   const router = useRouter();
 
-  // const publishedAt = new Date(date).toISOString();
-  // const modifiedAt = new Date(lastEdit || date).toISOString();
+  const publishedAt = new Date(createdTime).toISOString();
+  const modifiedAt = new Date(lastEditTime).toISOString();
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -138,8 +139,8 @@ export const BlogSEO = ({
     },
     headline: title,
     image: image,
-    // datePublished: publishedAt,
-    // dateModified: modifiedAt,
+    datePublished: publishedAt,
+    dateModified: modifiedAt,
     author: {
       '@type': 'Person',
       name: SiteConfig.author,
