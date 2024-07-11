@@ -101,6 +101,12 @@ export const CommonSEO = ({
         href={rssFeedUrl}
         title={SiteConfig?.title}
       />
+
+      {/* 谷歌广告 */}
+      <meta
+        name="google-adsense-account"
+        content="ca-pub-9533100025276131"
+      ></meta>
     </Head>
   );
 };

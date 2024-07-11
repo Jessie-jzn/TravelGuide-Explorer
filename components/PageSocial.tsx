@@ -10,9 +10,9 @@ interface SocialLink {
 
 const socialLinks: SocialLink[] = [
   SiteConfig.twitter && {
-    name: 'twitter',
-    href: `https://twitter.com/${SiteConfig.twitter}`,
-    title: `Twitter @${SiteConfig.twitter}`,
+    name: 'X',
+    href: `https://x.com/${SiteConfig.twitter}`,
+    title: `X @${SiteConfig.twitter}`,
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

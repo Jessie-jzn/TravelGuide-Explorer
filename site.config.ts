@@ -46,7 +46,7 @@ const SiteConfig = {
 
   // 社交媒体地址（可选）
   // social (optional)
-  twitter: '',
+  twitter: 'Qioj3exsXCtf1Ol',
   newsletter: '',
   linkedin: '',
   youtube: '@jessie6450',

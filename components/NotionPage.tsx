@@ -7,7 +7,7 @@ import PageSocial from './PageSocial';
 // import PropertyValue from './PropertyValue';
 
 // import { PageBlock } from 'notion-types'
-// import { getBlockTitle } from 'notion-utils';
+import { getPageProperty } from 'notion-utils';
 import { NotionRenderer } from 'react-notion-x';
 import { Block } from 'notion-types';
 import * as Types from '@/lib/type';
@@ -80,6 +80,7 @@ const Equation = dynamic(() =>
 //     ssr: false,
 //   },
 // );
+
 const minTableOfContentsItems = 3;
 
 const propertyLastEditedTimeValue = (
@@ -94,6 +95,7 @@ const propertyLastEditedTimeValue = (
     },
     defaultFn,
   );
+
 const propertyDateValue = (
   {
     pageHeader,
@@ -139,10 +141,10 @@ const NotionPage: React.FC<Types.PageProps> = ({
   const showTableOfContents = !!isBlogPost;
 
   const title = SiteConfig.title;
-  // const socialDescription =
-  //   getPageProperty<string>('Description', block, recordMap) ||
-  //   SiteConfig.description;
-  const socialDescription = SiteConfig.description;
+  const socialDescription =
+    getPageProperty<string>('Description', block, recordMap) ||
+    SiteConfig.description;
+  // const socialDescription = SiteConfig.description;
 
   // const socialImage = mapImageUrl(
   //   getPageProperty<string>('Social Image', block, recordMap) ||
@@ -150,6 +152,13 @@ const NotionPage: React.FC<Types.PageProps> = ({
   //     SiteConfig.defaultPageCover,
   //   block,
   // );
+  // const imgs = mapImageUrl(
+  //   getPageProperty<string>('Social Image', block, recordMap),
+  //   block,
+  // );
+  // console.log('imgs', imgs);
+  // debugger;
+
   const socialImage = mapImageUrl(
     (block as Block)?.format?.page_cover || SiteConfig.defaultPageCover,
     block,
@@ -169,7 +178,6 @@ const NotionPage: React.FC<Types.PageProps> = ({
       //   Modal,
       //   Tweet,
       Header: NotionPageHeader,
-
       propertyLastEditedTimeValue,
       propertyDateValue,
       propertyCreatedTimeValue,
