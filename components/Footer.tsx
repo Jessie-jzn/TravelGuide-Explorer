@@ -48,7 +48,7 @@ const Footer = ({ navigationLinks }: MenuProps) => {
             ))}
           </ul>
         </div> */}
-        <div className="flex flex-col sm:mt-8 md:mt-8 lg:mt-8">
+        <div className="flex flex-col sm:mt-8">
           <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
             订阅
           </h2>

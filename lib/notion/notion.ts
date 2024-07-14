@@ -55,3 +55,7 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
 
   return recordMap;
 }
+export async function search(params: any) {
+  console.log('进入了notion方法的search');
+  return notion.search(params);
+}

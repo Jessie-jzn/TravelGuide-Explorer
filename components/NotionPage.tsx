@@ -5,14 +5,14 @@ import Link from 'next/link';
 import SiteConfig from '../site.config';
 import PageSocial from './PageSocial';
 // import PropertyValue from './PropertyValue';
-
+import { searchNotion } from '@/lib/search-notion';
 // import { PageBlock } from 'notion-types'
 import { getPageProperty } from 'notion-utils';
 import { NotionRenderer } from 'react-notion-x';
 import { Block } from 'notion-types';
 import * as Types from '@/lib/type';
 import styles from './styles.module.css';
-import PropertyValue from './PropertyValue';
+import NotionPropertyValue from './NotionPropertyValue';
 import NotionPageHeader from './NotionPageHeader';
 import { BlogSEO } from '@/components/SEO';
 import { mapImageUrl } from '@/lib/util';
@@ -87,7 +87,7 @@ const propertyLastEditedTimeValue = (
   { block, pageHeader }: { pageHeader: boolean; block: Block },
   defaultFn: () => React.ReactNode,
 ) =>
-  PropertyValue(
+  NotionPropertyValue(
     {
       type: 'lastEdited',
       block,
@@ -104,7 +104,7 @@ const propertyDateValue = (
   }: { pageHeader: boolean; schema: any; block: Block },
   defaultFn: () => React.ReactNode,
 ) =>
-  PropertyValue(
+  NotionPropertyValue(
     {
       type: 'published',
       block,
@@ -118,7 +118,7 @@ const propertyCreatedTimeValue = (
   { pageHeader, block }: { pageHeader: boolean; block: Block },
   defaultFn: () => React.ReactNode,
 ) =>
-  PropertyValue(
+  NotionPropertyValue(
     {
       type: 'created',
       block,
@@ -185,6 +185,8 @@ const NotionPage: React.FC<Types.PageProps> = ({
         bodyClassName={styles.notion}
         components={components}
         recordMap={recordMap}
+        isShowingSearch={true}
+        onHideSearch={() => {}}
         // rootPageId={site.rootNotionPageId}
         rootDomain={SiteConfig.domain}
         fullPage={true}
@@ -197,7 +199,7 @@ const NotionPage: React.FC<Types.PageProps> = ({
         defaultPageCoverPosition={SiteConfig.defaultPageCoverPosition}
         // mapPageUrl={siteMapPageUrl}
         // mapImageUrl={mapImageUrl}
-        // searchNotion={config.isSearchEnabled ? searchNotion : null}
+        searchNotion={searchNotion}
         pageAside={pageAside}
         // footer={footer}
       />

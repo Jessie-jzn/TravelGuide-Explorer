@@ -12,7 +12,7 @@ interface PropertyValueProps {
   pageHeader?: boolean;
 }
 
-const PropertyValue = (
+const NotionPropertyValue = (
   { type, block, data, schema, pageHeader }: PropertyValueProps,
   defaultFn: () => React.ReactNode,
 ) => {
@@ -46,4 +46,4 @@ const PropertyValue = (
   return defaultFn();
 };
 
-export default PropertyValue;
+export default NotionPropertyValue;

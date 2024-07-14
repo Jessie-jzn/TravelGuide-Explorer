@@ -2,7 +2,7 @@ import { Client } from '@notionhq/client';
 import { NotionAPI } from 'notion-client';
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
-import { NOTION_TOKEN } from '../constants';
+import { NOTION_TOKEN, NOTION_GUIDE_ID } from '../constants';
 if (!NOTION_TOKEN) {
   throw new Error('NOTION_TOKEN is not defined');
 }
@@ -29,6 +29,46 @@ class NotionService {
       const response = await this.client.databases.query({
         database_id: databaseId,
       });
+      return response.results;
+    } catch (error: any) {
+      console.error('Error fetching database:', error.body || error);
+      throw new Error('Failed to fetch database');
+    }
+  }
+  /**
+   * 搜索数据库
+   * @param databaseId
+   * @returns
+   */
+  async searchNotionByTitle(
+    params: any,
+  ): Promise<QueryDatabaseResponse['results']> {
+    try {
+      const response = await this.client.search(params);
+      console.log('搜索searchNotionByTitle的response', response);
+      return response.results;
+    } catch (error: any) {
+      console.error('Error fetching database:', error.body || error);
+      throw new Error('Failed to fetch database');
+    }
+  }
+  /**
+   * 搜索数据库
+   * @param databaseId
+   * @returns
+   */
+  async searchNotionByDataBases(params: any) {
+    try {
+      const response = await this.client.databases.query({
+        database_id: '89e05ac475f248a583b8d46d6a0caaed',
+        filter: {
+          property: '土耳其',
+          checkbox: {
+            equals: true,
+          },
+        },
+      });
+      console.log('搜索searchNotionByDataBases的response', response);
       return response.results;
     } catch (error: any) {
       console.error('Error fetching database:', error.body || error);

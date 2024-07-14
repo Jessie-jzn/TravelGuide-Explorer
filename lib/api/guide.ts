@@ -15,6 +15,10 @@ export const getCountryList = async () => {
 
   return formatDatabase(res);
 };
+export const searchNotionByTitle = async (params: any) => {
+  const res = await notionService.searchNotionByTitle(params);
+  return res;
+};
 
 // export const getCountryList = async () => {
 //   const res = await getPage(NOTION_COUNTRY_ID);

@@ -1,4 +1,4 @@
-import { Breadcrumbs } from 'react-notion-x';
+import { Breadcrumbs, Search } from 'react-notion-x';
 import SiteConfig from '@/site.config';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -25,17 +25,6 @@ const NotionPageHeader = ({ block }: any) => {
           label: matchingLink ? matchingLink.title : decodeURIComponent(path),
         };
       });
-      // const homeLink = SiteConfig.navigationLinks.find(
-      //   (link) => link.url === '/',
-      // );
-      // debugger;
-      // if (homeLink) {
-      //   pathArray.unshift({
-      //     href: homeLink.url,
-      //     label: homeLink.title,
-      //   });
-      // }
-
       setBreadcrumbs(pathArray);
     }
   }, [router]);
@@ -52,6 +41,7 @@ const NotionPageHeader = ({ block }: any) => {
           </div>
         ))}
         <Breadcrumbs block={block} rootOnly={true} />
+        <Search block={block} title={null} />
       </div>
     </header>
   );

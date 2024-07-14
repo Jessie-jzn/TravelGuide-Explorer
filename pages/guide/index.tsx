@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import * as API from '@/lib/api/guide';
 import GuideCard from '@/components/GuideCard';
@@ -22,6 +23,9 @@ export const getStaticProps: GetStaticProps = async () => {
     API.getTravelGuideList(),
     API.getCountryList(),
   ]);
+  // const keys = await API.searchNotionByTitle();
+
+  console.log('guideList', guideList);
 
   // 提取包含指南的国家列表
   const guidesByCountry = getGuidesByCountry(guideList, countryList);
@@ -30,13 +34,34 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       guidesByCountry: guidesByCountry,
       posts: guideList,
+      // keys: keys,
     },
     revalidate: 10,
   };
 };
 
 const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
-  // const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  // console.log('keys', keys);
+
+  const handleSearch = async () => {
+    const query = {
+      filter: {
+        // property: 'china',
+        // checkbox: {
+        //   equals: true,
+        // },
+      },
+    };
+    const res = await fetch(`/api/searchDatabase?query=${query}`);
+    // const data = await res.json();
+    console.log('res', res);
+    // setResults(data);
+  };
+
+  // useEffect(() => {
+  //   handleSearch();
+  // }, [searchValue]);
 
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700  px-4 sm:px-8 lg:px-8">
@@ -45,10 +70,11 @@ const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
           旅行攻略
         </h1>
         <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-          I primarily cover web development and tech topics, occasionally
-          sharing insights into my personal life.
+          Every trip is a new adventure and I love exploring the culture,
+          history and cuisine of different countries, interacting with the
+          locals and getting a feel for their way of life.
         </p>
-        {/* <div className="relative max-w-lg">
+        <div className="relative max-w-lg">
           <label>
             <span className="sr-only">搜索相关攻略</span>
             <input
@@ -59,21 +85,23 @@ const Index = ({ guidesByCountry }: IndexProps): React.JSX.Element => {
               className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-sky-500 focus:ring-sky-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
             />
           </label>
-          <svg
-            className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </div> */}
+          <div onClick={handleSearch}>
+            <svg
+              className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
 
       {guidesByCountry.map(

@@ -45,7 +45,7 @@ const Header = ({ navigationLinks }: MenuProps) => {
       <div className="flex max-w-2xl lg:max-w-5xl">
         <div className="pointer-events-auto sm:hidden block px-10">
           <div className="flex rounded-full bg-white px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-            {navigationLinks.map((item) => {
+            {navigationLinks.map((item: MenuItem) => {
               const isActive = isActivePath(pathname, item.url);
               return (
                 <Link href={item.url} key={item.id}>
@@ -112,7 +112,7 @@ const Header = ({ navigationLinks }: MenuProps) => {
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                {navigationLinks.map((item) => {
+                {navigationLinks.map((item: MenuItem) => {
                   return (
                     <li
                       key={item.id}
