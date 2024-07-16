@@ -5,7 +5,7 @@ import Link from 'next/link';
 import SiteConfig from '../site.config';
 import PageSocial from './PageSocial';
 // import PropertyValue from './PropertyValue';
-import { searchNotion } from '@/lib/search-notion';
+import { searchNotion } from '@/lib/notion/search-notion';
 // import { PageBlock } from 'notion-types'
 import { getPageProperty } from 'notion-utils';
 import { NotionRenderer } from 'react-notion-x';
@@ -16,6 +16,7 @@ import NotionPropertyValue from './NotionPropertyValue';
 import NotionPageHeader from './NotionPageHeader';
 import { BlogSEO } from '@/components/SEO';
 import { mapImageUrl } from '@/lib/util';
+import { Modal } from 'react-notion-x/build/third-party/modal';
 // const Code = dynamic(() =>
 //   import('react-notion-x/build/third-party/code').then(async (m) => {
 //     // add / remove any prism syntaxes here
@@ -66,16 +67,6 @@ const Equation = dynamic(() =>
 );
 // const Pdf = dynamic(
 //   () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
-//   {
-//     ssr: false,
-//   },
-// );
-// const Modal = dynamic(
-//   () =>
-//     import('react-notion-x/build/third-party/modal').then((m) => {
-//       m.Modal.setAppElement('.notion-viewport');
-//       return m.Modal;
-//     }),
 //   {
 //     ssr: false,
 //   },
@@ -161,7 +152,7 @@ const NotionPage: React.FC<Types.PageProps> = ({
       Collection,
       Equation,
       //   Pdf,
-      //   Modal,
+      Modal,
       //   Tweet,
       Header: NotionPageHeader,
       propertyLastEditedTimeValue,

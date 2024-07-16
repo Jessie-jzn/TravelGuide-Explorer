@@ -14,7 +14,7 @@ class NotionService {
   constructor() {
     this.client = new Client({ auth: NOTION_TOKEN });
     this.notionAPI = new NotionAPI({
-      // apiBaseUrl: process.env.NOTION_API_BASE_URL,
+      apiBaseUrl: process.env.NOTION_API_BASE_URL,
     });
   }
   /**
@@ -40,13 +40,22 @@ class NotionService {
    * @param databaseId
    * @returns
    */
-  async searchNotionByTitle(
-    params: any,
-  ): Promise<QueryDatabaseResponse['results']> {
+  async searchNotionByTitle(params: any) {
     try {
+      // params = {
+      //   query: 'External tasks',
+      //   filter: {
+      //     value: 'database',
+      //     property: 'object',
+      //   },
+      //   sort: {
+      //     direction: 'ascending',
+      //     timestamp: 'last_edited_time',
+      //   },
+      // };
       const response = await this.client.search(params);
       console.log('搜索searchNotionByTitle的response', response);
-      return response.results;
+      return response;
     } catch (error: any) {
       console.error('Error fetching database:', error.body || error);
       throw new Error('Failed to fetch database');
@@ -83,6 +92,17 @@ class NotionService {
   async getPage(pageId: string) {
     try {
       const page = await this.notionAPI.getPage(pageId);
+
+      return page;
+    } catch (error: any) {
+      console.error('Error fetching page:', error.body || error);
+      throw new Error('Failed to fetch page');
+    }
+  }
+  async searchNotion(params: any) {
+    try {
+      console.log('执行searchNotion');
+      const page = await this.notionAPI.search(params);
 
       return page;
     } catch (error: any) {

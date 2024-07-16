@@ -76,3 +76,28 @@ export interface Schema {
 export interface DataItem {
   [key: string]: any;
 }
+
+// export interface SearchNotionParams {
+//   query: string;
+//   sort?: {
+//     direction: 'ascending' | 'descending';
+//     timestamp: 'created_time' | 'last_edited_time';
+//   };
+//   filter?: {
+//     property: string;
+//     value: string;
+//   };
+// }
+
+export interface SearchParams {
+  ancestorId?: string;
+  query: string;
+  filters?: {
+    isDeletedOnly: boolean;
+    excludeTemplates: boolean;
+    isNavigableOnly: boolean;
+    requireEditPermissions: boolean;
+  };
+  limit?: number;
+  searchSessionId?: string;
+}
