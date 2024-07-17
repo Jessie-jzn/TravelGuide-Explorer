@@ -53,7 +53,29 @@ class NotionService {
       //     timestamp: 'last_edited_time',
       //   },
       // };
-      const response = await this.client.search(params);
+      const body = {
+        type: 'BlocksInAncestor',
+        source: 'quick_find_public',
+        // ancestorId: parsePageId(params.ancestorId),
+        // sort: {
+        //   field: 'relevance',
+        // },
+        limit: params.limit || 20,
+        query: params.query,
+        filters: {
+          isDeletedOnly: false,
+          isNavigableOnly: false,
+          excludeTemplates: true,
+          requireEditPermissions: false,
+          ancestors: [],
+          createdBy: [],
+          editedBy: [],
+          lastEditedTime: {},
+          createdTime: {},
+          ...params.filters,
+        },
+      };
+      const response = await this.client.search({ ...body, ...params });
       console.log('搜索searchNotionByTitle的response', response);
       return response;
     } catch (error: any) {
@@ -103,6 +125,7 @@ class NotionService {
     try {
       console.log('执行searchNotion');
       const page = await this.notionAPI.search(params);
+      console.log('page', page);
 
       return page;
     } catch (error: any) {

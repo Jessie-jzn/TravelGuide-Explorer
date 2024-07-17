@@ -12,14 +12,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   console.log('<<< lambda search-notion', searchParams);
   try {
-    const results = await notionService.searchNotionByTitle(searchParams);
-    console.log('>>> lambda search-notion', results);
+    const response = await notionService.searchNotion(searchParams);
+    console.log('>>> lambda search-notion', response);
 
     res.setHeader(
       'Cache-Control',
       'public, s-maxage=60, max-age=60, stale-while-revalidate=60',
     );
-    res.status(200).json(results);
+    res.status(200).json(response);
   } catch (error) {
     console.error('Error searching Notion:', error);
     res.status(500).json({ error: 'Error searching Notion' });

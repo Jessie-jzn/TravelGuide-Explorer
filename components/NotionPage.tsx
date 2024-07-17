@@ -118,7 +118,7 @@ const propertyCreatedTimeValue = (
     defaultFn,
   );
 const NotionPage: React.FC<Types.PageProps> = ({
-  //   site,
+  site,
   recordMap,
   //   error,
   //   pageId,
@@ -139,6 +139,14 @@ const NotionPage: React.FC<Types.PageProps> = ({
     (block as Block)?.format?.page_cover || SiteConfig.defaultPageCover,
     block,
   );
+  const siteMapPageUrl = React.useMemo(() => {
+    const params: any = {};
+    // if (lite) params.lite = lite;
+
+    const searchParams = new URLSearchParams(params);
+    return mapPageUrl(site, recordMap, searchParams);
+  }, [recordMap]);
+
   const lastEditTime =
     getPageProperty<string>('last_edited_time', block, recordMap) || new Date();
   const createdTime =
@@ -188,7 +196,7 @@ const NotionPage: React.FC<Types.PageProps> = ({
         defaultPageIcon={SiteConfig.defaultPageIcon}
         defaultPageCover={SiteConfig.defaultPageCover}
         defaultPageCoverPosition={SiteConfig.defaultPageCoverPosition}
-        // mapPageUrl={siteMapPageUrl}
+        mapPageUrl={siteMapPageUrl}
         // mapImageUrl={mapImageUrl}
         searchNotion={searchNotion}
         pageAside={pageAside}
