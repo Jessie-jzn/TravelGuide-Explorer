@@ -1,7 +1,14 @@
 import { LANG } from './constants';
 import SiteConfig from '../site.config';
 import { defaultMapImageUrl } from 'react-notion-x';
-import { Block } from 'notion-types';
+import {
+  parsePageId,
+  uuidToId,
+  // getCanonicalPageId as getCanonicalPageIdImpl,
+} from 'notion-utils';
+import { Block, ExtendedRecordMap } from 'notion-types';
+
+import * as Types from './type';
 /**
  * 格式化日期
  * @timestampString 2024-02-22T15:22:31
@@ -139,7 +146,8 @@ export const formatDatabase = (pages: any) => {
     };
   });
 };
-
+// http://localhost:3000/guild/b81da5f3315a4048a300488d38c2ed55
+// http://localhost:3000/guide/b81da5f3-315a-4048-a300-488d38c2ed55
 export const formatPostBlock = (blockMap: any, pageId: string) => {
   const postInfo = blockMap?.block?.[pageId].value;
 
@@ -193,4 +201,103 @@ export const mapImageUrl = (url: string, block: Block) => {
   }
 
   return defaultMapImageUrl(url, block);
+};
+
+const createUrl = (path: string, searchParams: URLSearchParams) => {
+  return [path, searchParams.toString()].filter(Boolean).join('?');
+};
+/**
+ * 将页面 ID 映射到相应的 URL。
+ * @param site 站点配置。
+ * @param recordMap 包含页面信息的记录映射。
+ * @param searchParams 要附加到 URL 的搜索参数。
+ * @returns 一个函数，该函数接受一个页面 ID 并返回其相应的 URL。
+ */
+export const mapPageUrl =
+  (recordMap: ExtendedRecordMap, searchParams: URLSearchParams) =>
+  (pageId = ''): string => {
+    const pageUuid = parsePageId(pageId, { uuid: true }); // 将页面 ID 解析为 UUID 格式
+
+    // 如果页面 ID 对应于根 Notion 页面，则返回根 URL
+    return createUrl(
+      `/${getCanonicalPageId(pageUuid, recordMap, { uuid: true })}`,
+      searchParams,
+    );
+    // if (uuidToId(pageUuid) === SiteConfig.rootNotionPageId) {
+    //   return createUrl('/', searchParams);
+    // } else {
+    //   // 否则，返回页面的规范 URL
+    //   return createUrl(
+    //     `/${getCanonicalPageId(pageUuid, recordMap, { uuid: true })}`,
+    //     searchParams,
+    //   );
+    // }
+  };
+// function invertPageUrlOverrides(
+//   pageUrlOverrides: PageUrlOverridesMap,
+// ): PageUrlOverridesInverseMap {
+//   return Object.keys(pageUrlOverrides).reduce((acc, uri) => {
+//     const pageId = pageUrlOverrides[uri];
+
+//     return {
+//       ...acc,
+//       [pageId]: uri,
+//     };
+//   }, {});
+// }
+// export const pageUrlOverrides = cleanPageUrlMap(
+//   getSiteConfig('pageUrlOverrides', {}) || {},
+//   { label: 'pageUrlOverrides' }
+// )
+// export const inversePageUrlOverrides = invertPageUrlOverrides(pageUrlOverrides);
+const getCanonicalPageId = (
+  pageId: string,
+  recordMap: ExtendedRecordMap,
+  { uuid = true }: { uuid?: boolean } = {},
+) => {
+  const cleanPageId = parsePageId(pageId, { uuid: false });
+  if (!cleanPageId) {
+    return null;
+  }
+
+  // const override = inversePageUrlOverrides[cleanPageId];
+  // if (override) {
+  //   return override;
+  // } else {
+  //   return getCanonicalPageIdImpl(pageId, recordMap, {
+  //     uuid,
+  //   });
+  // // }
+  // debugger;
+  return getCanonicalPageIdImpl(pageId, recordMap, {
+    uuid,
+  });
+};
+
+export const getCanonicalPageIdImpl = (
+  pageId: string,
+  recordMap: ExtendedRecordMap,
+  { uuid = true }: { uuid?: boolean } = {},
+): string | null => {
+  if (!pageId || !recordMap) return null;
+
+  const block = recordMap.block[pageId]?.value;
+
+  if (block) {
+    // const slug =
+    //   (getPageProperty('slug', block, recordMap) as string | null) ||
+    //   (getPageProperty('Slug', block, recordMap) as string | null) ||
+    //   normalizeTitle(getBlockTitle(block, recordMap));
+
+    // if (slug) {
+    //   if (uuid) {
+    //     return `guild/${id}`;
+    //   } else {
+    //     return slug;
+    //   }
+    // }
+    return `guide/${pageId}`;
+  }
+
+  return id;
 };

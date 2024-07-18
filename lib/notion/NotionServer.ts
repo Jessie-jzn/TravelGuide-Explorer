@@ -1,6 +1,7 @@
 import { Client } from '@notionhq/client';
-import { NotionAPI } from 'notion-client';
+// import { NotionAPI } from 'notion-client';
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { NotionAPI } from './NotionAPI';
 
 import { NOTION_TOKEN, NOTION_GUIDE_ID } from '../constants';
 if (!NOTION_TOKEN) {
@@ -57,6 +58,7 @@ class NotionService {
         type: 'BlocksInAncestor',
         source: 'quick_find_public',
         // ancestorId: parsePageId(params.ancestorId),
+        ancestorId: '',
         // sort: {
         //   field: 'relevance',
         // },

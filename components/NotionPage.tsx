@@ -15,8 +15,9 @@ import styles from './styles.module.css';
 import NotionPropertyValue from './NotionPropertyValue';
 import NotionPageHeader from './NotionPageHeader';
 import { BlogSEO } from '@/components/SEO';
-import { mapImageUrl } from '@/lib/util';
+import { mapImageUrl, mapPageUrl } from '@/lib/util';
 import { Modal } from 'react-notion-x/build/third-party/modal';
+import { NOTION_GUIDE_ID } from '@/lib/constants';
 // const Code = dynamic(() =>
 //   import('react-notion-x/build/third-party/code').then(async (m) => {
 //     // add / remove any prism syntaxes here
@@ -144,7 +145,7 @@ const NotionPage: React.FC<Types.PageProps> = ({
     // if (lite) params.lite = lite;
 
     const searchParams = new URLSearchParams(params);
-    return mapPageUrl(site, recordMap, searchParams);
+    return mapPageUrl(recordMap, searchParams);
   }, [recordMap]);
 
   const lastEditTime =
@@ -186,7 +187,7 @@ const NotionPage: React.FC<Types.PageProps> = ({
         recordMap={recordMap}
         isShowingSearch={true}
         onHideSearch={() => {}}
-        // rootPageId={site.rootNotionPageId}
+        rootPageId={NOTION_GUIDE_ID}
         rootDomain={SiteConfig.domain}
         fullPage={true}
         previewImages={!!recordMap?.preview_images}
