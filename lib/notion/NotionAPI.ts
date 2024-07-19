@@ -1,4 +1,3 @@
-// import { promises as fs } from 'fs'
 import * as notion from 'notion-types';
 import got, { OptionsOfJSONResponseBody } from 'got';
 import {
@@ -323,10 +322,18 @@ export class NotionAPI {
     });
   }
 
+  /**
+   * 获取数据库id
+   * @param collectionId 集合ID
+   * @param collectionViewId 集合视图ID
+   * @param collectionView 集合视图对象
+   * @param param3
+   * @returns
+   */
   public async getCollectionData(
     collectionId: string,
     collectionViewId: string,
-    collectionView: any,
+    collectionView?: any,
     {
       limit = 9999,
       searchQuery = '',
@@ -334,13 +341,13 @@ export class NotionAPI {
       loadContentCover = true,
       gotOptions,
     }: {
-      type?: notion.CollectionViewType;
-      limit?: number;
-      searchQuery?: string;
+      type?: notion.CollectionViewType; // 'table' | 'gallery' | 'list' | 'board' | 'calendar'
+      limit?: number; // 结果限制数
+      searchQuery?: string; // 搜索查询字符串
       userTimeZone?: string;
-      userLocale?: string;
-      loadContentCover?: boolean;
-      gotOptions?: OptionsOfJSONResponseBody;
+      userLocale?: string; // 用户时区
+      loadContentCover?: boolean; // 是否加载内容封面
+      gotOptions?: OptionsOfJSONResponseBody; // 请求选项
     } = {},
   ) {
     const type = collectionView?.type;
@@ -349,6 +356,7 @@ export class NotionAPI {
       ? collectionView?.format?.board_columns_by
       : collectionView?.format?.collection_group_by;
 
+    // 处理过滤器
     let filters = [];
     if (collectionView?.format?.property_filters) {
       filters = collectionView.format?.property_filters.map(
@@ -362,7 +370,7 @@ export class NotionAPI {
       );
     }
 
-    //Fixes formula filters from not working
+    // 处理公式过滤器
     if (collectionView?.query2?.filter?.filters) {
       filters.push(...collectionView.query2.filter.filters);
     }
@@ -385,7 +393,7 @@ export class NotionAPI {
       searchQuery,
       userTimeZone,
     };
-
+    // 处理分组
     if (groupBy) {
       const groups =
         collectionView?.format?.board_columns ||

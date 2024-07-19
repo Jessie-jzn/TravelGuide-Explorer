@@ -12,11 +12,16 @@ export const getTravelGuideList = async () => {
 
 export const getCountryList = async () => {
   const res = await notionService.getDatabase(NOTION_COUNTRY_ID);
+  console.log('res!!!', res);
 
   return formatDatabase(res);
 };
-export const searchNotionByTitle = async (params: any) => {
-  const res = await notionService.searchNotionByTitle(params);
+export const getCollectionData = async (params: any) => {
+  // const res = await notionService.getCollectionData({
+  //   collectionId: NOTION_GUIDE_ID,
+  //   ...params,
+  // });
+  const res = await notionService.getPage(NOTION_GUIDE_ID);
   return res;
 };
 

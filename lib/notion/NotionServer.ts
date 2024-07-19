@@ -1,9 +1,8 @@
 import { Client } from '@notionhq/client';
-// import { NotionAPI } from 'notion-client';
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { NotionAPI } from './NotionAPI';
 
-import { NOTION_TOKEN, NOTION_GUIDE_ID } from '../constants';
+import { NOTION_TOKEN } from '../constants';
 if (!NOTION_TOKEN) {
   throw new Error('NOTION_TOKEN is not defined');
 }
@@ -37,75 +36,29 @@ class NotionService {
     }
   }
   /**
-   * 搜索数据库
-   * @param databaseId
-   * @returns
+   * 获取指定页面的内容
+   * @param pageId - 页面 ID
+   * @returns Promise<PageObjectResponse>
    */
-  async searchNotionByTitle(params: any) {
+  async getCollectionData(params: any) {
     try {
-      // params = {
-      //   query: 'External tasks',
-      //   filter: {
-      //     value: 'database',
-      //     property: 'object',
-      //   },
-      //   sort: {
-      //     direction: 'ascending',
-      //     timestamp: 'last_edited_time',
-      //   },
-      // };
-      const body = {
-        type: 'BlocksInAncestor',
-        source: 'quick_find_public',
-        // ancestorId: parsePageId(params.ancestorId),
-        ancestorId: '',
-        // sort: {
-        //   field: 'relevance',
-        // },
-        limit: params.limit || 20,
-        query: params.query,
-        filters: {
-          isDeletedOnly: false,
-          isNavigableOnly: false,
-          excludeTemplates: true,
-          requireEditPermissions: false,
-          ancestors: [],
-          createdBy: [],
-          editedBy: [],
-          lastEditedTime: {},
-          createdTime: {},
-          ...params.filters,
+      params = {
+        collectionId: params.collectionId,
+        collectionViewId: params.collectionId,
+        collectionView: {
+          type: 'table',
         },
       };
-      const response = await this.client.search({ ...body, ...params });
-      console.log('搜索searchNotionByTitle的response', response);
-      return response;
+      const page = await this.notionAPI.getCollectionData(
+        params.collectionId,
+        params.collectionViewId,
+        params.collectionView,
+      );
+
+      return page;
     } catch (error: any) {
-      console.error('Error fetching database:', error.body || error);
-      throw new Error('Failed to fetch database');
-    }
-  }
-  /**
-   * 搜索数据库
-   * @param databaseId
-   * @returns
-   */
-  async searchNotionByDataBases(params: any) {
-    try {
-      const response = await this.client.databases.query({
-        database_id: '89e05ac475f248a583b8d46d6a0caaed',
-        filter: {
-          property: '土耳其',
-          checkbox: {
-            equals: true,
-          },
-        },
-      });
-      console.log('搜索searchNotionByDataBases的response', response);
-      return response.results;
-    } catch (error: any) {
-      console.error('Error fetching database:', error.body || error);
-      throw new Error('Failed to fetch database');
+      console.error('Error fetching page:', error.body || error);
+      throw new Error('Failed to fetch page');
     }
   }
   /**
@@ -123,6 +76,11 @@ class NotionService {
       throw new Error('Failed to fetch page');
     }
   }
+  /**
+   * 在指定页面上查询
+   * @param params
+   * @returns
+   */
   async searchPageByBlock(params: any) {
     try {
       console.log('执行searchNotion');

@@ -23,9 +23,10 @@ export const getStaticProps: GetStaticProps = async () => {
     API.getTravelGuideList(),
     API.getCountryList(),
   ]);
-  // const keys = await API.searchNotionByTitle();
 
-  console.log('guideList', guideList);
+  const keys = await API.getCollectionData({});
+
+  console.log('keys', keys);
 
   // 提取包含指南的国家列表
   const guidesByCountry = getGuidesByCountry(guideList, countryList);
