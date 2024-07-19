@@ -269,16 +269,14 @@ const getCanonicalPageId = (
   //   });
   // // }
   // debugger;
-  return getCanonicalPageIdImpl(pageId, recordMap, {
-    uuid,
-  });
+  return getCanonicalPageIdImpl(pageId, recordMap);
 };
 
 export const getCanonicalPageIdImpl = (
   pageId: string,
   recordMap: ExtendedRecordMap,
-  { uuid = true }: { uuid?: boolean } = {},
-): string | null => {
+  // { uuid = true }: { uuid?: boolean } = {},
+) => {
   if (!pageId || !recordMap) return null;
 
   const block = recordMap.block[pageId]?.value;
@@ -299,5 +297,5 @@ export const getCanonicalPageIdImpl = (
     return `guide/${pageId}`;
   }
 
-  return id;
+  // return id;
 };

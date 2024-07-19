@@ -185,7 +185,7 @@ const NotionPage: React.FC<Types.PageProps> = ({
         bodyClassName={styles.notion}
         components={components}
         recordMap={recordMap}
-        isShowingSearch={true}
+        isShowingSearch={false}
         onHideSearch={() => {}}
         rootPageId={NOTION_GUIDE_ID}
         rootDomain={SiteConfig.domain}

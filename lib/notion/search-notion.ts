@@ -12,7 +12,7 @@
 // })
 
 export const searchNotion = (params: any) => {
-  return fetch(`/api/search-notion`, {
+  return fetch(`/api/searchPageByBlock`, {
     method: 'POST',
     body: JSON.stringify(params),
     headers: {

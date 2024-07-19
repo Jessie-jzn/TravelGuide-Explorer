@@ -123,7 +123,7 @@ class NotionService {
       throw new Error('Failed to fetch page');
     }
   }
-  async searchNotion(params: any) {
+  async searchPageByBlock(params: any) {
     try {
       console.log('执行searchNotion');
       const page = await this.notionAPI.search(params);

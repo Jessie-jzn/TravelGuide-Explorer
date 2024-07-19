@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   console.log('<<< lambda search-notion', searchParams);
   try {
-    const response = await notionService.searchNotion(searchParams);
+    const response = await notionService.searchPageByBlock(searchParams);
     console.log('>>> lambda search-notion', response);
 
     res.setHeader(

@@ -31,16 +31,22 @@ const NotionPageHeader = ({ block }: any) => {
 
   return (
     <header className="notion-header">
-      <div className="notion-nav-header">
-        {breadcrumbs.map((breadcrumb, index) => (
-          <div key={index} className="breadcrumbs">
-            <Link href={breadcrumb.href} className="breadcrumb">
-              {breadcrumb.label}
-            </Link>
-            <div> / </div>
-          </div>
-        ))}
-        <Breadcrumbs block={block} rootOnly={true} />
+      <div
+        className="notion-nav-header"
+        style={{ justifyContent: 'space-between' }}
+      >
+        <div className="flex items-center">
+          {breadcrumbs.map((breadcrumb, index) => (
+            <div key={index} className="breadcrumbs">
+              <Link href={breadcrumb.href} className="breadcrumb">
+                {breadcrumb.label}
+              </Link>
+              <div> / </div>
+            </div>
+          ))}
+          <Breadcrumbs block={block} rootOnly={true} />
+        </div>
+
         <Search block={block} title={null} />
       </div>
     </header>
