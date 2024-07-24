@@ -24,11 +24,3 @@ export const getCollectionData = async (params: any) => {
   const res = await notionService.getPage(NOTION_GUIDE_ID);
   return res;
 };
-
-// export const getCountryList = async () => {
-//   const res = await getPage(NOTION_COUNTRY_ID);
-
-//   console.log('res', res);
-
-//   return formatDatabase(res);
-// };

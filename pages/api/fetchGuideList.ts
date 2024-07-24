@@ -15,16 +15,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('<<< 获取指定数据库的条目参数', searchParams);
   try {
     const pageData = await notionService.getPageRaw(NOTION_COUNTRY_ID);
-    const collectionId = Object.entries(
-      pageData?.data?.recordMap?.collection,
-    )[0][0];
-    const collectionView = '9cbfcaa5-ceed-4f65-b289-9d0f3d1c66d1';
+    // const collectionId = Object.entries(
+    //   pageData?.data?.recordMap?.collection,
+    // )[0][0];
+    // const collectionView = '9cbfcaa5-ceed-4f65-b289-9d0f3d1c66d1';
 
-    const res = await notionService.getCollectionData({
-      collectionId,
-    });
-    // const response = await notionService.getCollectionData(searchParams);
-    console.log('>>> 获取指定数据库的条目结果', pageData);
+    // const res = await notionService.getCollectionData({
+    //   collectionId,
+    // });
+    // // const response = await notionService.getCollectionData(searchParams);
+    // console.log('>>> 获取指定数据库的条目结果', pageData);
 
     res.setHeader(
       'Cache-Control',
