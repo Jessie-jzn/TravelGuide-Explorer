@@ -41,6 +41,23 @@ Some major features include: / 主要功能包括：
 - 📝 User-contributed reviews and recommendations / 用户贡献的评论和推荐
 - 🌐 Multi-language support for global accessibility / 全球可访问的多语言支持
 
+## 项目TODO
+- [x] 各页面UI
+- [x] 接入NOTION借口
+- [x] 统计和分析：提供网站访问量、文章阅读量、用户行为等统计数据
+- [x] SEO优化：提供SEO优化功能，自定义文章的标题、描述和关键词，增加搜索引擎曝光率
+- [ ] 区分正式、测试环境
+- [ ]  搜索和过滤：提供搜索功能，读者可以根据关键词查找旅行文章。提供按目的地、旅行类型、日期等过滤文章的选项。
+- [ ]  订阅和通知：读者可以订阅博客，通过邮箱接收新文章通知。
+- [ ]  tab新增摄影图像
+- [ ]  多媒体支持：提供图片和视频的优化和压缩功能，提高页面加载速度。
+- [ ]  分类和标签：可以为文章添加分类和标签，方便读者根据目的地、旅行类型（如冒险、休闲、美食等）和关键词查找内容
+- [ ]  用户注册和登录：允许用户通过邮箱或社交媒体账号（如Google、Facebook）注册和登录，以便于他们订阅博客、发表评论和互动
+- [ ]  评论和互动：读者可以对文章发表评论，和其他读者互动
+- [ ]  社交分享：读者可以将文章分享到社交媒体平台（如Facebook、Twitter、Instagram等）
+- [ ]  联系表单：提供联系表单，读者可以通过表单与博主联系，提出问题或建议
+
+
 ## Show Your Support / 表示支持
 
 If you find this project helpful, please give it a ⭐
