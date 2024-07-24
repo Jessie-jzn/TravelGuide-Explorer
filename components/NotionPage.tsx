@@ -5,7 +5,7 @@ import Link from 'next/link';
 import SiteConfig from '../site.config';
 import PageSocial from './PageSocial';
 // import PropertyValue from './PropertyValue';
-import { searchNotion } from '@/lib/notion/search-notion';
+import { searchNotion } from '@/lib/notion/searchNotion';
 // import { PageBlock } from 'notion-types'
 import { getPageProperty } from 'notion-utils';
 import { NotionRenderer } from 'react-notion-x';

@@ -44,7 +44,7 @@ class NotionService {
     try {
       params = {
         collectionId: params.collectionId,
-        collectionViewId: params.collectionId,
+        collectionViewId: params.collectionViewId,
         collectionView: {
           type: 'table',
         },
@@ -83,9 +83,17 @@ class NotionService {
    */
   async searchPageByBlock(params: any) {
     try {
-      console.log('执行searchNotion');
       const page = await this.notionAPI.search(params);
-      console.log('page', page);
+
+      return page;
+    } catch (error: any) {
+      console.error('Error fetching page:', error.body || error);
+      throw new Error('Failed to fetch page');
+    }
+  }
+  async getPageRaw(pageId: string) {
+    try {
+      const page = await this.notionAPI.getPageRaw(pageId);
 
       return page;
     } catch (error: any) {

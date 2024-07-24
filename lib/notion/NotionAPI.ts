@@ -75,6 +75,8 @@ export class NotionAPI {
       chunkNumber,
       gotOptions,
     });
+
+    console.log('page!!!!!!!!!!!', page);
     const recordMap = page?.recordMap as notion.ExtendedRecordMap;
 
     if (!recordMap?.block) {
@@ -288,7 +290,17 @@ export class NotionAPI {
       }
     }
   }
-
+  /**
+   * Fetches raw page data from Notion.
+   *
+   * @param pageId - The ID of the Notion page to fetch.
+   * @param options - Additional options for the request.
+   * @param options.chunkLimit - The number of content chunks to fetch per request (default: 100).
+   * @param options.chunkNumber - The chunk number to start fetching from (default: 0).
+   * @param options.gotOptions - Additional options to pass to the got request.
+   * @returns The raw page data from Notion.
+   * @throws Will throw an error if the pageId is invalid.
+   */
   public async getPageRaw(
     pageId: string,
     {
@@ -300,7 +312,7 @@ export class NotionAPI {
       chunkNumber?: number;
       gotOptions?: OptionsOfJSONResponseBody;
     } = {},
-  ) {
+  ): Promise<notion.PageChunk> {
     const parsedPageId = parsePageId(pageId);
 
     if (!parsedPageId) {
@@ -608,6 +620,16 @@ export class NotionAPI {
     });
   }
 
+  /**
+   * Generic fetch method to make API requests to Notion.
+   *
+   * @param params - Parameters for the fetch request.
+   * @param params.endpoint - The API endpoint to hit.
+   * @param params.body - The request body.
+   * @param params.gotOptions - Additional options to pass to the got request.
+   * @param params.headers - Additional headers for the request.
+   * @returns The response from the Notion API.
+   */
   public async fetch<T>({
     endpoint,
     body,
@@ -617,7 +639,7 @@ export class NotionAPI {
     endpoint: string;
     body: object;
     gotOptions?: OptionsOfJSONResponseBody;
-    headers?: any;
+    headers?: Record<string, string>;
   }): Promise<T> {
     const headers: any = {
       ...clientHeaders,
@@ -654,14 +676,5 @@ export class NotionAPI {
         headers,
       })
       .json();
-
-    // return fetch(url, {
-    //   method: 'post',
-    //   body: JSON.stringify(body),
-    //   headers
-    // }).then((res) => {
-    //   console.log(endpoint, res)
-    //   return res.json()
-    // })
   }
 }

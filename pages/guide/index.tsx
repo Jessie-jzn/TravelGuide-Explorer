@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { GetStaticProps } from 'next';
 import * as API from '@/lib/api/guide';
 import GuideCard from '@/components/GuideCard';

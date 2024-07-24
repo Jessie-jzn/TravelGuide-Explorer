@@ -6,6 +6,7 @@ import { MenuItem } from '../lib/type';
 import { useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+
 interface MenuProps {
   navigationLinks: MenuItem[];
 }
@@ -19,6 +20,7 @@ const isActivePath = (path: string, url: string): boolean => {
 const Header = ({ navigationLinks }: MenuProps) => {
   const { pathname } = useRouter();
   const router = useRouter();
+
   const [visible, setVisible] = useState(false);
 
   const handleClickMenuItem = (url: string) => {

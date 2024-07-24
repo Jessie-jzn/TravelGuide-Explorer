@@ -2,17 +2,23 @@ import Meta from '@/components/Meta';
 import ContactIcon from '@/components/ContactIcon';
 import Image from 'next/image';
 import * as API from '@/lib/api/guide';
+import { getPage } from '@/lib/notion/getNotionPage';
 import { GetStaticProps } from 'next';
 import { Post } from '@/lib/type';
 // import PostItemCard from '@/components/PostItemCard';
 import backgroundImage from '@/public/imags/index.jpg';
 import PostItemHome from '@/components/PostItemHome';
+import { useEffect } from 'react';
+import { CommonSEO } from '@/components/SEO';
 
 interface IndexProps {
   posts: Post[];
 }
 export const getStaticProps: GetStaticProps = async () => {
   const data = await API.getTravelGuideList();
+  // const datas = await getPage({});
+
+  // console.log('datas', datas);
 
   return {
     props: {
@@ -22,9 +28,33 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 const Home = ({ posts }: IndexProps) => {
+  const getPage = (params: any) => {
+    return fetch(`/api/fetchGuideList`, {
+      method: 'POST',
+      body: JSON.stringify(params),
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res;
+        }
+
+        const error: any = new Error(res.statusText);
+        error.response = res;
+        return Promise.reject(error);
+      })
+      .then((res) => res.json());
+  };
+
+  useEffect(() => {
+    getPage({});
+  }, []);
   return (
     <>
       <Meta title="Jessie's Travel Guide" />
+      <CommonSEO title="index" description="" image="" ogType="website" />
       <div className="flex-auto mx-auto w-full">
         <div className="relative w-full h-[500px] sm:h-[300px] overflow-hidden rounded-lg">
           <Image
