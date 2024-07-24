@@ -52,6 +52,11 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
         `,
           }}
         ></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9533100025276131"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
       <ThemeProvider
         defaultTheme="system"
