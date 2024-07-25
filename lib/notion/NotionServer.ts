@@ -45,9 +45,7 @@ class NotionService {
       params = {
         collectionId: params.collectionId,
         collectionViewId: params.collectionViewId,
-        collectionView: {
-          type: 'table',
-        },
+        collectionView: params.collectionView,
       };
       const page = await this.notionAPI.getCollectionData(
         params.collectionId,

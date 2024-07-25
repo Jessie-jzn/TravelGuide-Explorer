@@ -2,7 +2,9 @@ import Meta from '@/components/Meta';
 import ContactIcon from '@/components/ContactIcon';
 import Image from 'next/image';
 import * as API from '@/lib/api/guide';
-import { getPage } from '@/lib/notion/getNotionPage';
+// import { getPage } from '@/lib/notion/getNotionPage';
+import { NOTION_GUIDE_ID } from '@/lib/constants';
+
 import { GetStaticProps } from 'next';
 import { Post } from '@/lib/type';
 // import PostItemCard from '@/components/PostItemCard';
@@ -31,7 +33,9 @@ const Home = ({ posts }: IndexProps) => {
   const getPage = (params: any) => {
     return fetch(`/api/fetchGuideList`, {
       method: 'POST',
-      body: JSON.stringify(params),
+      body: JSON.stringify({
+        pageId: NOTION_GUIDE_ID,
+      }),
       headers: {
         'content-type': 'application/json',
       },

@@ -1,4 +1,4 @@
-export const getPage = (params: any) => {
+export const getNotionPage = (params: any) => {
   return fetch(`/api/fetchGuideList`, {
     method: 'POST',
     body: JSON.stringify(params),
