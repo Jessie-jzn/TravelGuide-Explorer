@@ -37,6 +37,10 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
   }, [router.events]);
   return (
     <>
+      <meta
+        name="google-adsense-account"
+        content="ca-pub-9533100025276131"
+      ></meta>
       <Head>
         <script
           async
@@ -51,6 +55,16 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
           gtag('config', 'G-RDJEQXSM3X');
         `,
           }}
+        ></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9533100025276131"
+          crossOrigin="anonymous"
+        ></script>
+        <script
+          async
+          custom-element="amp-ad"
+          src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"
         ></script>
         <script
           async

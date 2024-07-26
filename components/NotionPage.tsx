@@ -18,6 +18,7 @@ import { BlogSEO } from '@/components/SEO';
 import { mapImageUrl, mapPageUrl } from '@/lib/util';
 import { Modal } from 'react-notion-x/build/third-party/modal';
 import { NOTION_GUIDE_ID } from '@/lib/constants';
+import AdSense from './AdSense';
 // const Code = dynamic(() =>
 //   import('react-notion-x/build/third-party/code').then(async (m) => {
 //     // add / remove any prism syntaxes here
@@ -203,6 +204,7 @@ const NotionPage: React.FC<Types.PageProps> = ({
         pageAside={pageAside}
         // footer={footer}
       />
+      <AdSense />
     </>
   );
 };

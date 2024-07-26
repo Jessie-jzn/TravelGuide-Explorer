@@ -74,7 +74,12 @@ const Home = ({ posts }: IndexProps) => {
               探索世界的奇幻之旅
             </h1>
             <div className="mt-4 text-white">
-              <ContactIcon fillColor="zinc-100" />
+              <ContactIcon
+                fillColor="zinc-200"
+                hoverFillColor="zinc-100"
+                darkFillColor="zinc-200"
+                darkHoverFillColor="zinc-100"
+              />
             </div>
           </div>
         </div>
