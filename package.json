@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "patch-package",
     "dev": "next dev",
-    "build": "next build && npx tailwindcss -o build.css --minify && next-sitemap",
+    "build": "next build && npx tailwindcss -o build.css --minify",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write ."
