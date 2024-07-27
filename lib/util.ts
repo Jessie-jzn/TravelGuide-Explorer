@@ -14,7 +14,9 @@ import * as Types from './type';
  * @timestampString 2024-02-22T15:22:31
  * @returns 格式化后的日期字符串，例如：2024年02月22日
  */
-export const formatTimestampToDate = (timestampString: number): string => {
+export const formatTimestampToDate = (
+  timestampString: number | string,
+): string => {
   if (!timestampString) return '';
   const timestamp = new Date(timestampString);
   const year = timestamp.getFullYear();

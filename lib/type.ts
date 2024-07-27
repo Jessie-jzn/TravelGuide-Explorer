@@ -19,7 +19,8 @@ export interface Post {
   date?: string;
   image: string;
   tags?: any;
-  cover: string;
+  tagItems?: { name: string; color: string }[];
+  pageCover: string;
   created_time?: string;
   country: string[];
 }
@@ -100,4 +101,16 @@ export interface SearchParams {
   };
   limit?: number;
   searchSessionId?: string;
+}
+
+export interface NotionPageParamsProp {
+  pageId: string;
+  from: string;
+}
+
+export interface SchemaProp {
+  [key: string]: {
+    type: string;
+    name: string;
+  };
 }

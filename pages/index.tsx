@@ -10,6 +10,7 @@ import { Post } from '@/lib/type';
 // import PostItemCard from '@/components/PostItemCard';
 import backgroundImage from '@/public/imags/index.jpg';
 import PostItemHome from '@/components/PostItemHome';
+import getDataBaseList from '@/lib/notion/getDataBaseList';
 import { useEffect } from 'react';
 import { CommonSEO } from '@/components/SEO';
 
@@ -17,44 +18,49 @@ interface IndexProps {
   posts: Post[];
 }
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await API.getTravelGuideList();
+  const data = await getDataBaseList({
+    pageId: NOTION_GUIDE_ID,
+    from: 'index',
+  });
+
+  console.log('data', data, data.allPages);
   // const datas = await getPage({});
 
   // console.log('datas', datas);
 
   return {
     props: {
-      posts: data,
+      posts: data.allPages,
     },
     revalidate: 10,
   };
 };
 const Home = ({ posts }: IndexProps) => {
-  const getPage = (params: any) => {
-    return fetch(`/api/fetchGuideList`, {
-      method: 'POST',
-      body: JSON.stringify({
-        pageId: NOTION_GUIDE_ID,
-      }),
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res;
-        }
+  // const getPage = (params: any) => {
+  //   return fetch(`/api/fetchGuideList`, {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       pageId: NOTION_GUIDE_ID,
+  //     }),
+  //     headers: {
+  //       'content-type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res;
+  //       }
 
-        const error: any = new Error(res.statusText);
-        error.response = res;
-        return Promise.reject(error);
-      })
-      .then((res) => res.json());
-  };
+  //       const error: any = new Error(res.statusText);
+  //       error.response = res;
+  //       return Promise.reject(error);
+  //     })
+  //     .then((res) => res.json());
+  // };
 
-  useEffect(() => {
-    getPage({});
-  }, []);
+  // useEffect(() => {
+  //   getPage({});
+  // }, []);
   return (
     <>
       <Meta title="Jessie's Travel Guide" />

@@ -99,5 +99,15 @@ class NotionService {
       throw new Error('Failed to fetch page');
     }
   }
+  async getBlocks(blockIds: string[], gotOptions?: any) {
+    try {
+      const page = await this.notionAPI.getBlocks(blockIds, gotOptions);
+
+      return page;
+    } catch (error: any) {
+      console.error('Error fetching page:', error.body || error);
+      throw new Error('Failed to fetch page');
+    }
+  }
 }
 export default NotionService;
