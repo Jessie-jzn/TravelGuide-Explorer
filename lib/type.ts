@@ -20,7 +20,8 @@ export interface Post {
   image: string;
   tags?: any;
   tagItems?: { name: string; color: string }[];
-  pageCover: string;
+  pageCover?: string;
+  cover?: string;
   created_time?: string;
   country: string[];
 }

@@ -23,44 +23,14 @@ export const getStaticProps: GetStaticProps = async () => {
     from: 'index',
   });
 
-  console.log('data', data, data.allPages);
-  // const datas = await getPage({});
-
-  // console.log('datas', datas);
-
   return {
     props: {
-      posts: data.allPages,
+      posts: data.allPages?.filter((_, index) => index < 6),
     },
     revalidate: 10,
   };
 };
 const Home = ({ posts }: IndexProps) => {
-  // const getPage = (params: any) => {
-  //   return fetch(`/api/fetchGuideList`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       pageId: NOTION_GUIDE_ID,
-  //     }),
-  //     headers: {
-  //       'content-type': 'application/json',
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res;
-  //       }
-
-  //       const error: any = new Error(res.statusText);
-  //       error.response = res;
-  //       return Promise.reject(error);
-  //     })
-  //     .then((res) => res.json());
-  // };
-
-  // useEffect(() => {
-  //   getPage({});
-  // }, []);
   return (
     <>
       <Meta title="Jessie's Travel Guide" />

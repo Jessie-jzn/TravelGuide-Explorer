@@ -2,6 +2,7 @@ import getPage from './getPage';
 import getAllPageIds from './getAllPageIds';
 import getBlockInBatches from './getBlockInBatches';
 import getPageProperties from './getPageProperties';
+import getAllTagsList from './getAllTagsList';
 import { idToUuid } from 'notion-utils';
 import SiteConfig from '../../site.config';
 
@@ -18,20 +19,12 @@ export default async function getDataBaseList({
 }: Types.NotionPageParamsProp) {
   console.log('[Fetching Data]', pageId, from);
   const pageRecordMap = await getPage({ pageId, from });
-  console.log(
-    'pageRecordMappageRecordMappageRecordMappageRecordMap',
-    pageRecordMap,
-  );
+
   if (!pageRecordMap) {
     console.error('can`t get Notion Data ; Which id is: ', pageId);
     return {};
   }
-  debugger;
 
-  console.log(
-    'pageRecordMappageRecordMappageRecordMappageRecordMap',
-    pageRecordMap,
-  );
   pageId = idToUuid(pageId);
   let block = pageRecordMap.block || {};
   const rawMetadata = block[pageId]?.value;
@@ -105,12 +98,13 @@ export default async function getDataBaseList({
     return post && post?.status === 'Published';
   });
 
-  //   console.log(
-  //     'collectionDatacollectionDatacollectionDatacollectionData',
-  //     allPages,
-  //   );
+  // 所有标签
+  const tagOptions = getAllTagsList({
+    allPages,
+    tagOptions: getTagOptions(schema),
+  });
 
-  return { allPages };
+  return { allPages, tagOptions };
 }
 
 /**
