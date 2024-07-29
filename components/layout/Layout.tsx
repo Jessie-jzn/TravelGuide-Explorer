@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import SiteConfig from '../site.config';
+import SiteConfig from '../../site.config';
 import Header from './Header';
 import Footer from './Footer';
 

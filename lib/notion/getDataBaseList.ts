@@ -20,6 +20,8 @@ export default async function getDataBaseList({
   console.log('[Fetching Data]', pageId, from);
   const pageRecordMap = await getPage({ pageId, from });
 
+  console.log('pageRecordMappageRecordMappageRecordMap', pageRecordMap);
+
   if (!pageRecordMap) {
     console.error('can`t get Notion Data ; Which id is: ', pageId);
     return {};
@@ -117,7 +119,6 @@ const getTagOptions = (schema: Types.SchemaProp) => {
   const tagSchema = Object.values(schema).find(
     (e) => e.name === SiteConfig.NOTION_PROPERTY_NAME.tags,
   ) as any;
-  console.log('tagSchematagSchematagSchematagSchema', tagSchema.options);
 
   return tagSchema?.options || [];
 };

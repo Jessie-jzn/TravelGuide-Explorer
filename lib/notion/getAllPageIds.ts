@@ -35,6 +35,8 @@ export default function getAllPageIds(
     console.error('Error fetching page IDs from collectionQuery:', error);
   }
 
+  console.log('pageIds', pageIds);
+
   // 否则按照数据库原始排序
   if (
     pageIds.length === 0 &&

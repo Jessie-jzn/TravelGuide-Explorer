@@ -2,6 +2,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { MenuItem } from '@/lib/type';
+import SiteConfig from '../../site.config';
+import SocialContactIcon from './SocialContactIcon';
+
 interface MenuProps {
   navigationLinks: MenuItem[];
 }
@@ -70,6 +73,16 @@ const Footer = ({ navigationLinks }: MenuProps) => {
               </button>
             </div>
           </form>
+        </div>
+      </div>
+      <div className="mt-16 flex flex-col items-center ">
+        <SocialContactIcon prop={{ className: 'mb-3 flex space-x-4' }} />
+        <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
+          © {new Date().getFullYear()}
+          {` • `} Built with {SiteConfig.author} &#128293;{' '}
+        </div>
+        <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
+          <Link href="/">{SiteConfig.title}</Link>
         </div>
       </div>
       <div className="w-full pt-8 sm:pt-4 sm:pb-4 border-t pb-16 dark:border-zinc-900 border-[#E8E8EA] dark:bg-zinc-800">

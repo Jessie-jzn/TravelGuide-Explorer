@@ -9,7 +9,7 @@ import '../styles/globals.css';
 import '../styles/notion.css';
 
 // import * as API from '@/lib/api/guide';
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/Layout';
 import { MenuItem } from '@/lib/type';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';

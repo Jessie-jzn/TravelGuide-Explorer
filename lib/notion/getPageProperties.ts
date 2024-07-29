@@ -135,7 +135,6 @@ const getPageProperties = async (
   properties.content = value.content ?? [];
   properties.tagItems =
     properties?.tags?.map((tag: any) => {
-      console.log('tag', tag, tagOptions);
       return {
         name: tag,
         color: tagOptions?.find((t) => t.value === tag)?.color || '',

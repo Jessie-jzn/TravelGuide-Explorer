@@ -22,7 +22,7 @@ export const CommonSEO = ({
 
   const socialImageUrl = image;
   const url = `${SiteConfig.siteUrl}${router.asPath}`;
-  console.log('urlurlurlurl', url);
+
   // const socialImageUrl = getSocialImageUrl(pageId) || image;
 
   return (

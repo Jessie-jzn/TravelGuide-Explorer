@@ -37,3 +37,6 @@ lib/api.ts
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/public/sitemap*.xml
+/public/robots.txt

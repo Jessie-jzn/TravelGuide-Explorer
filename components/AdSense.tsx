@@ -1,13 +1,20 @@
 import { useEffect } from 'react';
+import {
+  ADSENSE_GOOGLE_ID,
+  ADSENSE_GOOGLE_SLOT_IN_ARTICLE,
+  IsPROD,
+} from '@/lib/constants';
 
 const AdSense = () => {
   useEffect(() => {
-    try {
-      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push(
-        {},
-      );
-    } catch (err) {
-      console.error('Adsense error:', err);
+    if (IsPROD) {
+      try {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push(
+          {},
+        );
+      } catch (err) {
+        console.error('Adsense error:', err);
+      }
     }
   }, []);
 
@@ -15,8 +22,8 @@ const AdSense = () => {
     <ins
       className="adsbygoogle"
       style={{ display: 'block' }}
-      data-ad-client="ca-pub-9533100025276131" // 替换为你的广告客户端ID
-      data-ad-slot="7362818103" // 替换为你的广告位ID
+      data-ad-client={`ca-${ADSENSE_GOOGLE_ID}`} // 替换为你的广告客户端ID
+      data-ad-slot={ADSENSE_GOOGLE_SLOT_IN_ARTICLE} // 替换为你的广告位ID
       data-ad-format="auto"
       data-full-width-responsive="true"
     ></ins>

@@ -76,7 +76,6 @@ export class NotionAPI {
       gotOptions,
     });
 
-    console.log('page!!!!!!!!!!!', page);
     const recordMap = page?.recordMap as notion.ExtendedRecordMap;
 
     if (!recordMap?.block) {
@@ -161,6 +160,11 @@ export class NotionAPI {
               },
             );
 
+            console.log(
+              'collectionDatacollectionDatacollectionData',
+              collectionData,
+            );
+
             // await fs.writeFile(
             //   `${collectionId}-${collectionViewId}.json`,
             //   JSON.stringify(collectionData.result, null, 2)
@@ -191,6 +195,12 @@ export class NotionAPI {
               [collectionViewId]: (collectionData.result as any)
                 ?.reducerResults,
             };
+
+            console.log('recordMap.collection_query', {
+              ...recordMap.collection_query![collectionId],
+              [collectionViewId]: (collectionData.result as any)
+                ?.reducerResults,
+            });
           } catch (err: any) {
             // It's possible for public pages to link to private collections, in which case
             // Notion returns a 400 error
@@ -215,6 +225,10 @@ export class NotionAPI {
     if (signFileUrls) {
       await this.addSignedUrls({ recordMap, contentBlockIds, gotOptions });
     }
+    console.log(
+      'recordMaprecordMaprecordMaprecordMaprecordMaprecordMap',
+      recordMap,
+    );
 
     return recordMap;
   }
@@ -407,14 +421,18 @@ export class NotionAPI {
     };
     // 处理分组
     if (groupBy) {
+      // 获取分组信息，可能来自 board_columns 或 collection_groups
       const groups =
         collectionView?.format?.board_columns ||
         collectionView?.format?.collection_groups ||
         [];
+
+      // 定义迭代器，根据不同的类型选择不同的迭代器
       const iterators = [
         isBoardType ? 'board' : 'group_aggregation',
         'results',
       ];
+      // 定义运算符，用于不同类型的过滤条件
       const operators = {
         checkbox: 'checkbox_is',
         url: 'string_starts_with',
@@ -422,42 +440,49 @@ export class NotionAPI {
         select: 'enum_is',
         multi_select: 'enum_contains',
         created_time: 'date_is_within',
-        ['undefined']: 'is_empty',
+        ['undefined']: 'is_empty', // 未定义的情况
       } as any;
 
+      // 初始化 reducersQuery 对象，用于存储不同的 reducer 查询
       const reducersQuery = {} as any;
+
+      // 遍历每个分组
       for (const group of groups) {
         const {
-          property,
-          value: { value, type },
+          property, // 分组的属性
+          value: { value, type }, // 分组的值和类型
         } = group;
 
+        // 遍历每个迭代器
         for (const iterator of iterators) {
+          // 根据迭代器类型设置属性
           const iteratorProps =
-            iterator === 'results'
+            iterator === 'results' // 结果迭代器
               ? {
                   type: iterator,
                   limit,
                 }
               : {
-                  type: 'aggregation',
+                  type: 'aggregation', // 聚合迭代器
                   aggregation: {
-                    aggregator: 'count',
+                    aggregator: 'count', // 聚合方式为计数
                   },
                 };
-
+          // 判断值是否未定义
           const isUncategorizedValue = typeof value === 'undefined';
+          // 判断值是否为日期范围
           const isDateValue = value?.range;
-          // TODO: review dates reducers
+          // 根据不同的值类型设置查询标签
           const queryLabel = isUncategorizedValue
-            ? 'uncategorized'
+            ? 'uncategorized' // 未分类
             : isDateValue
-              ? value.range?.start_date || value.range?.end_date
+              ? value.range?.start_date || value.range?.end_date // 日期范围
               : value?.value || value;
 
+          // 根据不同的值类型设置查询值
           const queryValue =
             !isUncategorizedValue && (isDateValue || value?.value || value);
-
+          // 构建 reducersQuery 对象
           reducersQuery[`${iterator}:${type}:${queryLabel}`] = {
             ...iteratorProps,
             filter: {
@@ -482,31 +507,34 @@ export class NotionAPI {
           };
         }
       }
-
+      // 根据是否为看板类型设置 reducer 标签
       const reducerLabel = isBoardType ? 'board_columns' : `${type}_groups`;
+      // 构建 loader 对象
       loader = {
         type: 'reducer',
         reducers: {
           [reducerLabel]: {
             type: 'groups',
-            groupBy,
+            groupBy, // 分组依据
             ...(collectionView?.query2?.filter && {
-              filter: collectionView?.query2?.filter,
+              filter: collectionView?.query2?.filter, // 继承原有的过滤条件
             }),
-            groupSortPreference: groups.map((group: any) => group?.value),
+            groupSortPreference: groups.map((group: any) => group?.value), // 分组排序偏好
             limit,
           },
-          ...reducersQuery,
+          ...reducersQuery, // 包含所有的 reducersQuery
         },
-        ...collectionView?.query2,
+        ...collectionView?.query2, // 继承原有查询条件
         searchQuery,
         userTimeZone,
-        //TODO: add filters here
+        // 添加其他过滤条件
         filter: {
           filters: filters,
           operator: 'and',
         },
       };
+
+      console.log('loaderloaderloader', loader);
     }
 
     // if (isBoardType) {

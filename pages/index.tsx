@@ -1,7 +1,6 @@
-import Meta from '@/components/Meta';
-import ContactIcon from '@/components/ContactIcon';
+import SocialContactIcon from '@/components/layout/SocialContactIcon';
 import Image from 'next/image';
-import * as API from '@/lib/api/guide';
+// import * as API from '@/lib/api/guide';
 // import { getPage } from '@/lib/notion/getNotionPage';
 import { NOTION_GUIDE_ID } from '@/lib/constants';
 
@@ -11,7 +10,7 @@ import { Post } from '@/lib/type';
 import backgroundImage from '@/public/imags/index.jpg';
 import PostItemHome from '@/components/PostItemHome';
 import getDataBaseList from '@/lib/notion/getDataBaseList';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { CommonSEO } from '@/components/SEO';
 
 interface IndexProps {
@@ -33,7 +32,6 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home = ({ posts }: IndexProps) => {
   return (
     <>
-      <Meta title="Jessie's Travel Guide" />
       <CommonSEO title="index" description="" image="" ogType="website" />
       <div className="flex-auto mx-auto w-full">
         <div className="relative w-full h-[500px] sm:h-[300px] overflow-hidden rounded-lg">
@@ -42,21 +40,19 @@ const Home = ({ posts }: IndexProps) => {
             alt="Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 flex flex-col justify-end bg-black bg-opacity-50 p-10 md:p-12 sm:p-6">
+          <div className="absolute inset-0 flex flex-col justify-end  p-10 md:p-12 sm:p-6">
             <h1 className="mb-4 sm:mb-2 text-2xl sm:text-lg font-bold text-white md:text-4xl">
               Jessie&apos;s Travel Blog
             </h1>
             <h1 className="text-4xl sm:text-lg font-bold text-white md:text-4xl">
               探索世界的奇幻之旅
             </h1>
-            <div className="mt-4 text-white">
-              <ContactIcon
-                fillColor="zinc-200"
-                hoverFillColor="zinc-100"
-                darkFillColor="zinc-200"
-                darkHoverFillColor="zinc-100"
-              />
-            </div>
+            <SocialContactIcon
+              prop={{
+                className: 'mt-4 text-white w-full flex space-x-4',
+                theme: 'white',
+              }}
+            />
           </div>
         </div>
 

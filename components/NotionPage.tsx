@@ -3,7 +3,8 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import SiteConfig from '../site.config';
-import PageSocial from './PageSocial';
+import SocialContactIcon from './layout/SocialContactIcon';
+// import PageSocial from './PageSocial';
 // import PropertyValue from './PropertyValue';
 import { searchNotion } from '@/lib/notion/searchNotion';
 // import { PageBlock } from 'notion-types'
@@ -171,7 +172,7 @@ const NotionPage: React.FC<Types.PageProps> = ({
     }),
     [],
   );
-  const pageAside = React.useMemo(() => <PageSocial />, []);
+  const pageAside = React.useMemo(() => <SocialContactIcon />, []);
 
   return (
     <>
