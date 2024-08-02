@@ -1,4 +1,3 @@
-import { Github } from './components/layout/SocialIcon';
 
 // 这个对象包含了网站的元数据信息，比如标题、作者、描述等。可以在 Next.js 网站中使用这些信息
 const SiteConfig = {
